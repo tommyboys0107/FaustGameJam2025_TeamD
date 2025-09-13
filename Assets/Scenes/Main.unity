@@ -594,7 +594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6701e76abe11954db416a4f00c2f4e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcPrefab: {fileID: 8807230210658134820, guid: 3285bc8d932877147bbea8b509aa2b80, type: 3}
+  npcPrefab: {fileID: 4991512300739663450, guid: 8c3041cc03be6624c9a4e29be705abd0, type: 3}
   spawnParent: {fileID: 0}
   minSpawnRadius: 50
   maxSpawnRadius: 500
