@@ -60,7 +60,7 @@ namespace HideAndSeek.Core
         // Game time tracking
         private float currentGameTime;
         public float CurrentGameTime => currentGameTime;
-        public float RemainingTime => Mathf.Max(0, gameTime - currentGameTime);
+        // public float RemainingTime => Mathf.Max(0, gameTime - currentGameTime);
 
         // Player references
         private GameObject killerPlayer;
