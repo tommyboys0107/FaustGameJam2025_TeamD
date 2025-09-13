@@ -114,7 +114,7 @@ namespace HideAndSeek.Core
         {
             if (currentState == GameState.Playing)
             {
-                UpdateGameTime(currentGameTime += Time.deltaTime);
+                UpdateGameTime(currentGameTime + Time.deltaTime);
             }
         }
 
