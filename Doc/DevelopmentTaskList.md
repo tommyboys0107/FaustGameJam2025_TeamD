@@ -27,11 +27,11 @@
 - [x] 2.6 建立GameSettings ScriptableObject
 
 #### 3. 角色控制系統 (PlayerController)
-- [ ] 3.1 建立PlayerController基礎類別
-- [ ] 3.2 實作玩家移動控制（WASD/方向鍵）
-- [ ] 3.3 整合Unity Input System
-- [ ] 3.4 實作角色狀態管理
-- [ ] 3.5 建立互動系統基礎框架
+- [x] 3.1 建立PlayerController基礎類別
+- [x] 3.2 實作玩家移動控制（WASD/方向鍵）
+- [x] 3.3 整合Unity Input System
+- [x] 3.4 實作角色狀態管理
+- [x] 3.5 建立互動系統基礎框架
 
 ### 第二階段：角色系統開發 (Week 2-3)
 
