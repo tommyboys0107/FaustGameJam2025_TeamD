@@ -2,9 +2,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using HideAndSeek.Data;
+using System;
 
 namespace HideAndSeek.Core
 {
+    [Serializable]
+    public class SpawnZoneSettings
+    {
+        [SerializeField] public Transform zoneObject;
+        [SerializeField] public float width = 10f;
+        [SerializeField] public float length = 10f;
+        [SerializeField, Range(0f, 1f)] public float spawnRatio = 0.2f;
+        [HideInInspector] public int calculatedNPCCount;
+
+        public bool IsValid()
+        {
+            return zoneObject != null && width > 0 && length > 0 && spawnRatio > 0;
+        }
+    }
+
     public class SpawnManager : MonoBehaviour
     {
         [Header("Spawn Settings")]
@@ -13,6 +29,10 @@ namespace HideAndSeek.Core
         [SerializeField] private float minSpawnRadius = 5f;
         [SerializeField] private float maxSpawnRadius = 50f;
         [SerializeField] private float minSpawnDistance = 2f;
+
+        [Header("Zone Spawn Settings")]
+        [SerializeField] private List<SpawnZoneSettings> spawnZones = new List<SpawnZoneSettings>();
+        [SerializeField] private bool useZoneSpawning = false;
 
         [Header("Spawn Events")]
         public UnityEvent OnSpawnStart;
@@ -83,9 +103,48 @@ namespace HideAndSeek.Core
             poolInitialized = true;
         }
 
+        private bool ValidateSpawnZoneSettings()
+        {
+            if (!useZoneSpawning || spawnZones.Count == 0)
+                return true;
+
+            float totalRatio = 0f;
+            foreach (var zone in spawnZones)
+            {
+                if (!zone.IsValid())
+                {
+                    Debug.LogError($"Invalid spawn zone settings detected: {zone.zoneObject?.name ?? "Null Object"}");
+                    return false;
+                }
+                totalRatio += zone.spawnRatio;
+            }
+
+            if (totalRatio > 1.0f)
+            {
+                Debug.LogError($"Total spawn ratio ({totalRatio:F2}) exceeds 1.0. Please adjust zone ratios.");
+                return false;
+            }
+
+            return true;
+        }
+
+        private void CalculateZoneNPCCounts(int totalNPCCount)
+        {
+            foreach (var zone in spawnZones)
+            {
+                zone.calculatedNPCCount = Mathf.RoundToInt(totalNPCCount * zone.spawnRatio);
+            }
+        }
+
         public void SpawnNPCs()
         {
             if (!poolInitialized) InitializePool();
+
+            if (!ValidateSpawnZoneSettings())
+            {
+                Debug.LogError("Spawn zone validation failed. Aborting spawn.");
+                return;
+            }
 
             GameSettings settings = GameManager.Instance.GetGameSettings();
             int npcCount = settings != null ? settings.npcCount : 30;
@@ -93,13 +152,54 @@ namespace HideAndSeek.Core
             OnSpawnStart?.Invoke();
             ClearSpawnedPositions();
 
-            for (int i = 0; i < npcCount; i++)
+            if (useZoneSpawning && spawnZones.Count > 0)
             {
-                SpawnSingleNPC();
+                CalculateZoneNPCCounts(npcCount);
+                SpawnNPCsInZones();
+            }
+            else
+            {
+                for (int i = 0; i < npcCount; i++)
+                {
+                    SpawnSingleNPC();
+                }
             }
 
             OnSpawnComplete?.Invoke();
             Debug.Log($"Spawned {spawnedNPCs.Count} NPCs");
+        }
+
+        private void SpawnNPCsInZones()
+        {
+            foreach (var zone in spawnZones)
+            {
+                if (!zone.IsValid()) continue;
+
+                for (int i = 0; i < zone.calculatedNPCCount; i++)
+                {
+                    SpawnSingleNPCInZone(zone);
+                }
+            }
+        }
+
+        private void SpawnSingleNPCInZone(SpawnZoneSettings zone)
+        {
+            if (npcPool.Count == 0)
+            {
+                Debug.LogWarning("NPC pool is empty! Consider increasing pool size.");
+                return;
+            }
+
+            GameObject npc = npcPool.Dequeue();
+            Vector3 spawnPosition = GetRandomPositionInZone(zone);
+
+            npc.transform.position = spawnPosition;
+            npc.transform.rotation = Quaternion.Euler(0, UnityEngine.Random.Range(0f, 360f), 0);
+            npc.AddComponent<HideAndSeek.NPC.AIController>();
+            npc.SetActive(true);
+
+            spawnedNPCs.Add(npc);
+            spawnedPositions.Add(spawnPosition);
         }
 
         private void SpawnSingleNPC()
@@ -114,12 +214,46 @@ namespace HideAndSeek.Core
             Vector3 spawnPosition = GetRandomSpawnPosition();
 
             npc.transform.position = spawnPosition;
-            npc.transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
+            npc.transform.rotation = Quaternion.Euler(0, UnityEngine.Random.Range(0f, 360f), 0);
             npc.AddComponent<HideAndSeek.NPC.AIController>();
             npc.SetActive(true);
 
             spawnedNPCs.Add(npc);
             spawnedPositions.Add(spawnPosition);
+        }
+
+        private Vector3 GetRandomPositionInZone(SpawnZoneSettings zone)
+        {
+            Vector3 position;
+            int attempts = 0;
+            int maxAttempts = 100;
+
+            Vector3 zoneCenter = zone.zoneObject.position;
+            float halfWidth = zone.width * 0.5f;
+            float halfLength = zone.length * 0.5f;
+
+            do
+            {
+                float randomX = UnityEngine.Random.Range(-halfWidth, halfWidth);
+                float randomZ = UnityEngine.Random.Range(-halfLength, halfLength);
+
+                position = new Vector3(
+                    zoneCenter.x + randomX,
+                    zoneCenter.y,
+                    zoneCenter.z + randomZ
+                );
+
+                attempts++;
+
+                if (attempts >= maxAttempts)
+                {
+                    Debug.LogWarning($"Could not find non-overlapping spawn position in zone {zone.zoneObject.name}, using current position");
+                    break;
+                }
+
+            } while (IsPositionTooClose(position));
+
+            return position;
         }
 
         private Vector3 GetRandomSpawnPosition()
@@ -130,8 +264,8 @@ namespace HideAndSeek.Core
 
             do
             {
-                float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
-                float distance = Random.Range(minSpawnRadius, maxSpawnRadius);
+                float angle = UnityEngine.Random.Range(0f, 360f) * Mathf.Deg2Rad;
+                float distance = UnityEngine.Random.Range(minSpawnRadius, maxSpawnRadius);
 
                 position = new Vector3(
                     Mathf.Cos(angle) * distance,
@@ -218,12 +352,59 @@ namespace HideAndSeek.Core
 
             for (int i = 0; i < actualCount; i++)
             {
-                int randomIndex = Random.Range(0, availableNPCs.Count);
+                int randomIndex = UnityEngine.Random.Range(0, availableNPCs.Count);
                 result.Add(availableNPCs[randomIndex]);
                 availableNPCs.RemoveAt(randomIndex);
             }
 
             return result;
+        }
+
+        public void AddSpawnZone(Transform zoneObject, float width, float length, float spawnRatio)
+        {
+            var newZone = new SpawnZoneSettings
+            {
+                zoneObject = zoneObject,
+                width = width,
+                length = length,
+                spawnRatio = spawnRatio
+            };
+            spawnZones.Add(newZone);
+        }
+
+        public void RemoveSpawnZone(Transform zoneObject)
+        {
+            spawnZones.RemoveAll(zone => zone.zoneObject == zoneObject);
+        }
+
+        public void ClearSpawnZones()
+        {
+            spawnZones.Clear();
+        }
+
+        public void SetUseZoneSpawning(bool enabled)
+        {
+            useZoneSpawning = enabled;
+        }
+
+        public bool GetUseZoneSpawning()
+        {
+            return useZoneSpawning;
+        }
+
+        public List<SpawnZoneSettings> GetSpawnZones()
+        {
+            return new List<SpawnZoneSettings>(spawnZones);
+        }
+
+        public float GetTotalSpawnRatio()
+        {
+            float total = 0f;
+            foreach (var zone in spawnZones)
+            {
+                total += zone.spawnRatio;
+            }
+            return total;
         }
 
         private void OnDestroy()
