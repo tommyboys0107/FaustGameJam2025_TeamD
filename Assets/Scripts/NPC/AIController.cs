@@ -25,7 +25,6 @@ namespace HideAndSeek.NPC
 
         // Components
         private CharacterMovement characterMovement;
-        private Animator animator;
         private ActionSystem actionSystem;
 
         // Movement 
@@ -72,7 +71,8 @@ namespace HideAndSeek.NPC
             if (nextTime <= 0)
             {
                 nowState = RandomState();
-                switch(nowState)
+                Debug.Log($"{gameObject.name}: {nowState}");
+                switch (nowState)
                 {
                     case NPCState.Idle:
                         break;
@@ -93,9 +93,9 @@ namespace HideAndSeek.NPC
             NPCState state = NPCState.Idle;
             int max = (int)(dancingProb * 10) + 2;
             int rnd = Random.Range(0, max);
-            if (rnd == 0) nowState = NPCState.Idle;
-            else if (rnd == 1) nowState = NPCState.Move;
-            else nowState = NPCState.Dance;
+            if (rnd == 0) state = NPCState.Idle;
+            else if (rnd == 1) state = NPCState.Move;
+            else state = NPCState.Dance;
             return state;
         }
 
