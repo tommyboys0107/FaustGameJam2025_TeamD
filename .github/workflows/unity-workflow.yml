@@ -1,0 +1,104 @@
+name: Unity Workflow
+
+on:
+  push:
+  workflow_dispatch:
+    inputs:
+      symbolConfig:
+        description: 'Define symbol configuration'
+        type: choice
+        required: true
+        default: 'Debug'
+        options:
+          - Debug
+          - Release
+
+env:
+  PROJECT_NAME: 'Hide & Seek'
+  SYMBOL_CONFIG: ${{ inputs.symbolConfig || 'Debug' }}
+
+jobs:
+  print-env:
+    name: Print Input Variables
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Input Variables
+        run: echo "::notice::SYMBOL_CONFIG=${{ env.SYMBOL_CONFIG }}"
+
+  build-unity-project-standalone:
+    strategy:
+      matrix:
+        targetPlatform: [StandaloneWindows64, StandaloneOSX, StandaloneLinux64]
+    name: Build Unity Project ${{ matrix.targetPlatform }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-${{ matrix.targetPlatform }}
+          restore-keys: |
+            Library-
+      - name: Build Unity ${{ matrix.targetPlatform }}
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: ${{ matrix.targetPlatform }}
+          buildMethod: CliffLeeCL.ProjectBuilder.BuildProject
+          customParameters: -outputPath artifacts -defineSymbolConfig ${{ env.SYMBOL_CONFIG }}
+      - name: Upload Unity Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.PROJECT_NAME }}-${{ matrix.targetPlatform }}
+          path: artifacts
+
+  build-unity-project-webgl:
+    name: Build Unity Project WebGL
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-WebGL
+          restore-keys: |
+            Library-
+      - name: Build Unity
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: WebGL
+          buildMethod: CliffLeeCL.ProjectBuilder.BuildProject
+          customParameters: -outputPath artifacts -defineSymbolConfig ${{ env.SYMBOL_CONFIG }}
+      - name: Upload Unity Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.PROJECT_NAME }}-WebGL
+          path: artifacts
+      - name: Upload GitHub Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: artifacts/${{ env.PROJECT_NAME }}
+  
+  deploy-github-pages:
+    needs: build-unity-project-webgl
+    name: Deploy to GitHub Pages
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
