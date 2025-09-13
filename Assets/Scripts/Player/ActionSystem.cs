@@ -80,6 +80,7 @@ namespace HideAndSeek.Player
         public void PerformKill()
         {
             if (isPerformingAction) return;
+            if (playerController == null) return;
             if (playerController.PlayerRole != GameManager.PlayerRole.Killer) return;
             
             GameObject target = FindNearestTarget(npcLayer);
@@ -99,6 +100,7 @@ namespace HideAndSeek.Player
         public void PerformArrest()
         {
             if (isPerformingAction) return;
+            if (playerController == null) return;
             if (playerController.PlayerRole != GameManager.PlayerRole.Police) return;
             
             // Police can arrest the killer player
