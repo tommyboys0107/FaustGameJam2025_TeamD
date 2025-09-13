@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using HideAndSeek.Player;
 using UnityEngine.UI;
+using System.Collections;
 
 namespace HideAndSeek.Core
 {
@@ -23,7 +24,9 @@ namespace HideAndSeek.Core
 
         [Header("UI")]
         [SerializeField] private Text killScoreText;
-        
+        [SerializeField] private Image comboBar;
+        [SerializeField] private Text gameTimeText;
+
         // Singleton instance
         private static GameManager _instance;
         public static GameManager Instance
@@ -65,7 +68,6 @@ namespace HideAndSeek.Core
 
         // Game time tracking
         private float currentGameTime;
-        public float CurrentGameTime => currentGameTime;
         // public float RemainingTime => Mathf.Max(0, gameTime - currentGameTime);
 
         // Player references
@@ -74,6 +76,9 @@ namespace HideAndSeek.Core
         
         // Game statistics
         private int killScore = 0;
+
+        private float comboTime;
+        private Coroutine comboCoolDown;
 
         private void Awake()
         {
@@ -95,7 +100,7 @@ namespace HideAndSeek.Core
         private void Initialize()
         {
             currentState = GameState.Menu;
-            currentGameTime = 0f;
+            UpdateGameTime(0);
             updateKillScore(0);
         }
 
@@ -108,14 +113,17 @@ namespace HideAndSeek.Core
         {
             if (currentState == GameState.Playing)
             {
-                UpdateGameTime();
+                UpdateGameTime(currentGameTime += Time.deltaTime);
                 CheckWinConditions();
             }
         }
 
-        private void UpdateGameTime()
+        private void UpdateGameTime(float time)
         {
             currentGameTime += Time.deltaTime;
+            int minutes = (int)(time / 60);
+            int seconds = (int)(time % 60);
+            gameTimeText.text =$"{minutes:D2}:{seconds:D2}";
         }
 
         private void CheckWinConditions()
@@ -139,9 +147,11 @@ namespace HideAndSeek.Core
 
 
             currentState = GameState.Playing;
-            currentGameTime = 0f;
+            UpdateGameTime(0);
             updateKillScore(0);
-            
+            comboTime = 0;
+            comboBar.fillAmount = 0;
+
             OnGameStart?.Invoke();
             Debug.Log("Game Started!");
         }
@@ -160,6 +170,7 @@ namespace HideAndSeek.Core
             {
                 npc.enabled = false;
             }
+            if(comboCoolDown != null) StopCoroutine(comboCoolDown);
             currentState = GameState.GameOver;
             OnGameEnd?.Invoke();
             OnGameWin?.Invoke(winner);
@@ -170,7 +181,7 @@ namespace HideAndSeek.Core
         public void RestartGame()
         {
             currentState = GameState.Menu;
-            currentGameTime = 0f;
+            UpdateGameTime(0);
             updateKillScore(0);
             
             Debug.Log("Game Restarted!");
@@ -192,8 +203,18 @@ namespace HideAndSeek.Core
         public void AddKill()
         {
             if (currentState != GameState.Playing) return;
-            
-            updateKillScore(killScore + gameSettings.killBaseScore);
+
+            var score = killScore;
+            if(comboTime > 0)
+            {
+                score +=(int)(gameSettings.killBaseScore * gameSettings.comboMultiplier);
+            }
+            else
+            {
+                score += gameSettings.killBaseScore;
+                comboCoolDown = StartCoroutine(_comboCoolDown());
+            }
+            updateKillScore(score);
         }
 
         public GameObject GetPlayerByRole(PlayerRole role)
@@ -230,6 +251,19 @@ namespace HideAndSeek.Core
                     npcs[i].AddComponent<HideAndSeek.Player.PlayerInputTraditional>().SetPlayerID((int)PlayerRole.Police + 1);
                 }
             }
+        }
+
+        private IEnumerator _comboCoolDown()
+        {
+            comboTime = gameSettings.comboTimeWindow;
+            comboBar.fillAmount = 1f;
+            do
+            {
+                yield return null;
+                comboTime -= Time.deltaTime;
+                comboBar.fillAmount = comboTime / gameSettings.comboTimeWindow;
+            } while (comboTime > 0);
+            comboBar.fillAmount = 0f;
         }
     }
 }
