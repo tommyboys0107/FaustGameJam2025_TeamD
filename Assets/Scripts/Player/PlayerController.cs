@@ -27,7 +27,7 @@ namespace HideAndSeek.Player
         private GameManager.PlayerRole playerRole;
         private PlayerState currentState = PlayerState.Idle;
         
-        // Movement and input
+
         private Vector2 movementInput;
         private Vector3 velocity;
         private bool isGrounded;
@@ -83,6 +83,30 @@ namespace HideAndSeek.Player
             } 
         }
         
+
+        
+        // Input compatibility methods for traditional input
+        public void SetMovementInput(Vector2 input) { movementInput = input; }
+        public Vector2 GetMovementInput() { return movementInput; }
+        
+        // Public action methods for traditional input
+        public void TriggerInteract() 
+        { 
+            if (CanInteract && currentState != PlayerState.Stunned)
+                PerformInteraction();
+        }
+        
+        public void TriggerDisguise() 
+        { 
+            if (CanDisguise && currentState != PlayerState.Stunned)
+                PerformDisguise();
+        }
+        
+        public void TriggerDance() 
+        { 
+            if (currentState != PlayerState.Stunned)
+                PerformDance();
+        }
         public bool CanInteract => Time.time >= lastInteractionTime + interactionCooldown;
         public bool CanDisguise => Time.time >= lastDisguiseTime + disguiseCooldown;
         public float InteractionCooldownRemaining => Mathf.Max(0, (lastInteractionTime + interactionCooldown) - Time.time);
