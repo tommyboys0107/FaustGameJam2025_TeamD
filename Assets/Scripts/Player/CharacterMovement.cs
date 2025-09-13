@@ -73,15 +73,20 @@ namespace HideAndSeek.Player
                 (targetVelocity.magnitude > currentVelocity.magnitude ? acceleration : deceleration) * Time.deltaTime);
 
             // Apply gravity if not grounded
-            if (currentVelocity.y < 0)
+            if (characterController.isGrounded)
             {
                 currentVelocity.y = 0;
+            }
+            else
+            {
+                currentVelocity.y = -9.81f;
             }
 
             // Move the character
             if (characterController.enabled)
             {
                 characterController.Move(currentVelocity * Time.deltaTime);
+
             }
         }
 
