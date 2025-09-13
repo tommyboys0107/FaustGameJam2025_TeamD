@@ -41,12 +41,6 @@ namespace HideAndSeek.Player
         private ActionSystem actionSystem;
         private DisguiseSystem disguiseSystem;
         
-        // Input actions (will be set by Input System)
-        private InputAction moveAction;
-        private InputAction interactAction;
-        private InputAction disguiseAction;
-        private InputAction danceAction;
-        
         // Events
         public System.Action<GameManager.PlayerRole> OnPlayerRoleChanged;
         public System.Action<PlayerState> OnPlayerStateChanged;

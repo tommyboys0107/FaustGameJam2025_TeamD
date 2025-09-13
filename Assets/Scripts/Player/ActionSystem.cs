@@ -50,7 +50,7 @@ namespace HideAndSeek.Player
         private void InitializeComponents()
         {
             animator = GetComponentInChildren<Animator>();
-            playerController = GetComponent<PlayerController>();
+            //playerController = GetComponent<PlayerController>();
             
             if (audioSource == null)
                 audioSource = GetComponent<AudioSource>();
@@ -61,6 +61,11 @@ namespace HideAndSeek.Player
                 audioSource.playOnAwake = false;
                 audioSource.spatialBlend = 1f; // 3D sound
             }
+        }
+
+        public void SetPlayerController()
+        {
+            playerController = GetComponent<PlayerController>();
         }
         
         /// <summary>
@@ -80,7 +85,6 @@ namespace HideAndSeek.Player
         public void PerformKill()
         {
             if (isPerformingAction) return;
-            if (playerController == null) return;
             if (playerController.PlayerRole != GameManager.PlayerRole.Killer) return;
             
             GameObject target = FindNearestTarget(npcLayer);
@@ -100,7 +104,6 @@ namespace HideAndSeek.Player
         public void PerformArrest()
         {
             if (isPerformingAction) return;
-            if (playerController == null) return;
             if (playerController.PlayerRole != GameManager.PlayerRole.Police) return;
             
             // Police can arrest the killer player
@@ -159,10 +162,10 @@ namespace HideAndSeek.Player
             }
             
             // Play kill animation
-            if (animator != null)
+            /*if (animator != null)
             {
                 animator.SetTrigger("Kill");
-            }
+            }*/
             
             // Play kill sound
             if (killSound != null && audioSource != null)
@@ -171,7 +174,7 @@ namespace HideAndSeek.Player
             }
             
             // Wait for animation timing
-            yield return new WaitForSeconds(1f);
+            //yield return new WaitForSeconds(1f);
             
             // Execute kill
             ExecuteKill(target);

@@ -24,7 +24,6 @@ namespace HideAndSeek.Player
         // Components
         private Renderer characterRenderer;
         private MeshFilter meshFilter;
-        private PlayerController playerController;
         
         // Disguise state
         private float lastDisguiseTime;
@@ -60,7 +59,6 @@ namespace HideAndSeek.Player
         {
             characterRenderer = GetComponentInChildren<Renderer>();
             meshFilter = GetComponentInChildren<MeshFilter>();
-            playerController = GetComponent<PlayerController>();
             
             if (audioSource == null)
                 audioSource = GetComponent<AudioSource>();

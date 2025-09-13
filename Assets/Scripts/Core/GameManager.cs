@@ -244,11 +244,13 @@ namespace HideAndSeek.Core
                 {
                     npcs[i].AddComponent<HideAndSeek.Player.PlayerController>().SetPlayerRole(PlayerRole.Killer);
                     npcs[i].AddComponent<HideAndSeek.Player.PlayerInputTraditional>().SetPlayerID((int)PlayerRole.Killer + 1);
+                    npcs[i].GetComponent<HideAndSeek.Player.ActionSystem>().SetPlayerController();
                 }
                 else if (i == 1)
                 {
                     npcs[i].AddComponent<HideAndSeek.Player.PlayerController>().SetPlayerRole(PlayerRole.Police);
                     npcs[i].AddComponent<HideAndSeek.Player.PlayerInputTraditional>().SetPlayerID((int)PlayerRole.Police + 1);
+                    npcs[i].GetComponent<HideAndSeek.Player.ActionSystem>().SetPlayerController();
                 }
             }
         }
