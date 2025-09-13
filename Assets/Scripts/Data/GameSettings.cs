@@ -33,16 +33,6 @@ namespace HideAndSeek.Data
         [Range(0f, 1f)]
         public float npcDanceFrequency = 0.7f;
 
-        [Header("Detection Settings")]
-        [Tooltip("Base suspicion level increase rate")]
-        public float suspicionIncreaseRate = 1f;
-        
-        [Tooltip("Suspicion decrease rate when not suspicious")]
-        public float suspicionDecreaseRate = 0.5f;
-        
-        [Tooltip("Maximum suspicion level before being detected")]
-        public float maxSuspicionLevel = 100f;
-
         [Header("Score Settings")]
         [Tooltip("Base score for each kill")]
         public int killBaseScore = 100;
