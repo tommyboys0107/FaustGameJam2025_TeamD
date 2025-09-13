@@ -19,11 +19,6 @@ namespace HideAndSeek.Player
         [SerializeField] private float groundCheckDistance = 0.1f;
         [SerializeField] private LayerMask groundLayer = 1;
         
-        [Header("Audio")]
-        [SerializeField] private AudioSource audioSource;
-        [SerializeField] private AudioClip[] footstepSounds;
-        [SerializeField] private float footstepInterval = 0.5f;
-        
         // Components
         private CharacterController characterController;
         private Animator animator;
@@ -32,7 +27,6 @@ namespace HideAndSeek.Player
         private Vector3 currentVelocity;
         private Vector3 targetVelocity;
         private bool isGrounded;
-        private float lastFootstepTime;
         
         // Properties
         public Vector3 Velocity => currentVelocity;
@@ -54,7 +48,6 @@ namespace HideAndSeek.Player
         {
             UpdateGroundCheck();
             UpdateMovement();
-            UpdateAudio();
             UpdateAnimations();
         }
         
@@ -68,16 +61,6 @@ namespace HideAndSeek.Player
             }
             
             animator = GetComponentInChildren<Animator>();
-            
-            if (audioSource == null)
-                audioSource = GetComponent<AudioSource>();
-                
-            if (audioSource == null)
-            {
-                audioSource = gameObject.AddComponent<AudioSource>();
-                audioSource.playOnAwake = false;
-                audioSource.spatialBlend = 1f; // 3D sound
-            }
         }
         
         private void LoadSettingsFromGameManager()
@@ -123,16 +106,6 @@ namespace HideAndSeek.Player
             if (characterController.enabled)
             {
                 characterController.Move(currentVelocity * Time.deltaTime);
-            }
-        }
-        
-        private void UpdateAudio()
-        {
-            // Play footstep sounds when moving on ground
-            if (IsMoving && isGrounded && Time.time >= lastFootstepTime + footstepInterval)
-            {
-                PlayFootstepSound();
-                lastFootstepTime = Time.time;
             }
         }
         
@@ -223,15 +196,6 @@ namespace HideAndSeek.Player
             targetVelocity = Vector3.zero;
         }
         
-        private void PlayFootstepSound()
-        {
-            if (footstepSounds.Length == 0 || audioSource == null) return;
-            
-            // Play a random footstep sound
-            AudioClip footstep = footstepSounds[Random.Range(0, footstepSounds.Length)];
-            audioSource.PlayOneShot(footstep, 0.7f);
-        }
-        
         /// <summary>
         /// Update movement settings from game settings
         /// </summary>
@@ -268,7 +232,6 @@ namespace HideAndSeek.Player
             acceleration = Mathf.Max(0.1f, acceleration);
             deceleration = Mathf.Max(0.1f, deceleration);
             groundCheckDistance = Mathf.Max(0.01f, groundCheckDistance);
-            footstepInterval = Mathf.Max(0.1f, footstepInterval);
         }
     }
 }
