@@ -26,6 +26,7 @@ namespace HideAndSeek.Core
         [SerializeField] private Text killScoreText;
         [SerializeField] private Image comboBar;
         [SerializeField] private Text gameTimeText;
+        [SerializeField] private GameEndUI gameEndUI;
 
         // Singleton instance
         private static GameManager _instance;
@@ -73,8 +74,9 @@ namespace HideAndSeek.Core
         // Player references
         private GameObject killerPlayer;
         private GameObject policePlayer;
-        
+
         // Game statistics
+        private int killCount = 0;
         private int killScore = 0;
 
         private float comboTime;
@@ -94,14 +96,13 @@ namespace HideAndSeek.Core
                 return;
             }
             
-            Initialize();
+            ShowMeneu();
         }
 
-        private void Initialize()
+        public void ShowMeneu()
         {
             currentState = GameState.Menu;
-            UpdateGameTime(0);
-            updateKillScore(0);
+            //TODO: show menu
         }
 
         private void Start()
@@ -114,7 +115,6 @@ namespace HideAndSeek.Core
             if (currentState == GameState.Playing)
             {
                 UpdateGameTime(currentGameTime += Time.deltaTime);
-                CheckWinConditions();
             }
         }
 
@@ -124,11 +124,6 @@ namespace HideAndSeek.Core
             int minutes = (int)(time / 60);
             int seconds = (int)(time % 60);
             gameTimeText.text =$"{minutes:D2}:{seconds:D2}";
-        }
-
-        private void CheckWinConditions()
-        {
-            //TODO
         }
 
         private void updateKillScore(int core)
@@ -148,6 +143,7 @@ namespace HideAndSeek.Core
 
             currentState = GameState.Playing;
             UpdateGameTime(0);
+            killCount = 0;
             updateKillScore(0);
             comboTime = 0;
             comboBar.fillAmount = 0;
@@ -174,7 +170,7 @@ namespace HideAndSeek.Core
             currentState = GameState.GameOver;
             OnGameEnd?.Invoke();
             OnGameWin?.Invoke(winner);
-            
+            gameEndUI.Show(killCount, killScore, currentGameTime);            
             Debug.Log($"Game Over! Winner: {winner}");
         }
 
@@ -203,7 +199,7 @@ namespace HideAndSeek.Core
         public void AddKill()
         {
             if (currentState != GameState.Playing) return;
-
+            killCount++;
             var score = killScore;
             if(comboTime > 0)
             {
