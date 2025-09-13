@@ -1042,6 +1042,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8533919471574253179, guid: 8892c8a843c8f634997d9d132d0b414d, type: 3}
   m_PrefabInstance: {fileID: 999069354}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &999069356 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7715968506439783785, guid: 8892c8a843c8f634997d9d132d0b414d, type: 3}
+  m_PrefabInstance: {fileID: 999069354}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21d63ab25775ac646b2d059789a23747, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1034020649
 GameObject:
   m_ObjectHideFlags: 0
@@ -1402,7 +1413,7 @@ MonoBehaviour:
   killScoreText: {fileID: 1036466477}
   comboBar: {fileID: 1523146454}
   gameTimeText: {fileID: 369718390}
-  gameEndUI: {fileID: 0}
+  gameEndUI: {fileID: 999069356}
   currentState: 0
 --- !u!4 &1774794848
 Transform:
