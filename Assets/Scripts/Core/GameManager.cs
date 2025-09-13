@@ -110,13 +110,7 @@ namespace HideAndSeek.Core
 
         private void CheckWinConditions()
         {
-            int maxKills = gameSettings != null ? gameSettings.maxKillsToWin : defaultMaxKills;
-            
-            // Killer wins if kill count reaches maximum
-            if (killCount >= maxKills)
-            {
-                EndGame(PlayerRole.Killer);
-            }
+            //TODO
         }
 
         public void StartGame()
@@ -164,23 +158,11 @@ namespace HideAndSeek.Core
             if (currentState != GameState.Playing) return;
             
             killCount++;
-            Debug.Log($"Kill count: {killCount}/{gameSettings.maxKillsToWin}");
         }
 
         public GameObject GetPlayerByRole(PlayerRole role)
         {
             return role == PlayerRole.Killer ? killerPlayer : policePlayer;
-        }
-
-        // Public getters for game settings
-        public float GetMaxGameTime()
-        {
-            return gameSettings != null ? gameSettings.maxGameTime : defaultGameTime;
-        }
-        
-        public int GetMaxKills()
-        {
-            return gameSettings != null ? gameSettings.maxKillsToWin : defaultMaxKills;
         }
         
         public GameSettings GetGameSettings()

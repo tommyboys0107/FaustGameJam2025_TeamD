@@ -415,7 +415,7 @@ MonoBehaviour:
   OnGameWin:
     m_PersistentCalls:
       m_Calls: []
-  gameSettings: {fileID: 0}
+  gameSettings: {fileID: 11400000, guid: d5b701e0b8682104883a023b3471c09c, type: 2}
   defaultGameTime: 300
   defaultMaxKills: 10
   currentState: 0

@@ -15,13 +15,6 @@ namespace HideAndSeek.Data
         [Tooltip("Cooldown time for disguise action")]
         public float disguiseCooldown = 5f;
 
-        [Header("Game Balance")]
-        [Tooltip("Maximum kills needed for killer to win")]
-        public int maxKillsToWin = 10;
-        
-        [Tooltip("Maximum game time in seconds")]
-        public float maxGameTime = 300f; // 5 minutes
-
         [Header("Player Movement")]
         [Tooltip("Player movement speed")]
         public float playerMoveSpeed = 5f;
@@ -88,8 +81,6 @@ namespace HideAndSeek.Data
             killerCooldown = Mathf.Max(0.1f, killerCooldown);
             policeCooldown = Mathf.Max(0.1f, policeCooldown);
             disguiseCooldown = Mathf.Max(0.1f, disguiseCooldown);
-            maxKillsToWin = Mathf.Max(1, maxKillsToWin);
-            maxGameTime = Mathf.Max(30f, maxGameTime);
             playerMoveSpeed = Mathf.Max(0.1f, playerMoveSpeed);
             npcMoveSpeed = Mathf.Max(0.1f, npcMoveSpeed);
             npcCount = Mathf.Max(1, npcCount);
@@ -104,11 +95,6 @@ namespace HideAndSeek.Data
         public float GetActionCooldown(HideAndSeek.Core.GameManager.PlayerRole role)
         {
             return role == HideAndSeek.Core.GameManager.PlayerRole.Killer ? killerCooldown : policeCooldown;
-        }
-
-        public bool IsValidGameSettings()
-        {
-            return maxKillsToWin > 0 && maxGameTime > 0 && npcCount > 0;
         }
     }
 }
