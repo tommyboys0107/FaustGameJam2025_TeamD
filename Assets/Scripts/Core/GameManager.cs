@@ -106,14 +106,6 @@ namespace HideAndSeek.Core
         private void UpdateGameTime()
         {
             currentGameTime += Time.deltaTime;
-            
-            float maxTime = gameSettings != null ? gameSettings.maxGameTime : defaultGameTime;
-            
-            // Time limit reached - Police wins
-            if (currentGameTime >= maxTime)
-            {
-                EndGame(PlayerRole.Police);
-            }
         }
 
         private void CheckWinConditions()
