@@ -592,6 +592,294 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+--- !u!1 &469715288
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 469715290}
+  - component: {fileID: 469715289}
+  m_Layer: 0
+  m_Name: MeshMaterialManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &469715289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469715288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd7d6df47c80b984dacba9ded3f6147c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshMaterialGroups:
+  - name: BaseCharacter
+    mesh: {fileID: 2959467708922500008, guid: 78cea97c92e5e448ca046a1b4ddaa047, type: 3}
+    materials:
+    - {fileID: -2274090305892019849, guid: 78cea97c92e5e448ca046a1b4ddaa047, type: 3}
+    - {fileID: 4835078630258379571, guid: 78cea97c92e5e448ca046a1b4ddaa047, type: 3}
+    scale: {x: 0, y: 0, z: 0}
+  - name: BlueSoldier_Female
+    mesh: {fileID: 2959467708922500008, guid: 3fd6d50c6aa094fe1819a3edea1a8914, type: 3}
+    materials:
+    - {fileID: -1580535799172915004, guid: 3fd6d50c6aa094fe1819a3edea1a8914, type: 3}
+    - {fileID: -2274090305892019849, guid: 3fd6d50c6aa094fe1819a3edea1a8914, type: 3}
+    - {fileID: -5243988174349660497, guid: 3fd6d50c6aa094fe1819a3edea1a8914, type: 3}
+    - {fileID: -4288583467269203127, guid: 3fd6d50c6aa094fe1819a3edea1a8914, type: 3}
+    - {fileID: 2781410738928257789, guid: 3fd6d50c6aa094fe1819a3edea1a8914, type: 3}
+    - {fileID: 4835078630258379571, guid: 3fd6d50c6aa094fe1819a3edea1a8914, type: 3}
+    scale: {x: 0, y: 0, z: 0}
+  - name: BlueSoldier_Male
+    mesh: {fileID: 2959467708922500008, guid: cfa05b5544a6b425e910f9c3c0ce2305, type: 3}
+    materials:
+    - {fileID: -1580535799172915004, guid: cfa05b5544a6b425e910f9c3c0ce2305, type: 3}
+    - {fileID: -2274090305892019849, guid: cfa05b5544a6b425e910f9c3c0ce2305, type: 3}
+    - {fileID: -5243988174349660497, guid: cfa05b5544a6b425e910f9c3c0ce2305, type: 3}
+    - {fileID: -2404891402701243345, guid: cfa05b5544a6b425e910f9c3c0ce2305, type: 3}
+    - {fileID: 2781410738928257789, guid: cfa05b5544a6b425e910f9c3c0ce2305, type: 3}
+    - {fileID: 4835078630258379571, guid: cfa05b5544a6b425e910f9c3c0ce2305, type: 3}
+    scale: {x: 0, y: 0, z: 0}
+  - name: Casual2_Female
+    mesh: {fileID: 2959467708922500008, guid: 96f0b8539632d4019bbadebe7da222ff, type: 3}
+    materials:
+    - {fileID: -1536519034987021355, guid: 96f0b8539632d4019bbadebe7da222ff, type: 3}
+    - {fileID: -2274090305892019849, guid: 96f0b8539632d4019bbadebe7da222ff, type: 3}
+    - {fileID: -4288583467269203127, guid: 96f0b8539632d4019bbadebe7da222ff, type: 3}
+    - {fileID: -5637652675625914632, guid: 96f0b8539632d4019bbadebe7da222ff, type: 3}
+    - {fileID: -414921334540547795, guid: 96f0b8539632d4019bbadebe7da222ff, type: 3}
+    - {fileID: 4835078630258379571, guid: 96f0b8539632d4019bbadebe7da222ff, type: 3}
+    scale: {x: 0, y: 0, z: 0}
+  - name: Casual2_Male
+    mesh: {fileID: 2959467708922500008, guid: 457706c98b5b345ad85127e1d6ed6127, type: 3}
+    materials:
+    - {fileID: -1536519034987021355, guid: 457706c98b5b345ad85127e1d6ed6127, type: 3}
+    - {fileID: -2274090305892019849, guid: 457706c98b5b345ad85127e1d6ed6127, type: 3}
+    - {fileID: -4288583467269203127, guid: 457706c98b5b345ad85127e1d6ed6127, type: 3}
+    - {fileID: -5637652675625914632, guid: 457706c98b5b345ad85127e1d6ed6127, type: 3}
+    - {fileID: -414921334540547795, guid: 457706c98b5b345ad85127e1d6ed6127, type: 3}
+    - {fileID: 4835078630258379571, guid: 457706c98b5b345ad85127e1d6ed6127, type: 3}
+    scale: {x: 0, y: 0, z: 0}
+  - name: Casual3_Female
+    mesh: {fileID: 2959467708922500008, guid: 01e14ef2e15d54fb1b5c8d65cf0aa4ab, type: 3}
+    materials:
+    - {fileID: -1536519034987021355, guid: 01e14ef2e15d54fb1b5c8d65cf0aa4ab, type: 3}
+    - {fileID: -2274090305892019849, guid: 568daf9f1c7c14849bafccfdfacabba0, type: 3}
+    - {fileID: -4288583467269203127, guid: 01e14ef2e15d54fb1b5c8d65cf0aa4ab, type: 3}
+    - {fileID: -5637652675625914632, guid: 01e14ef2e15d54fb1b5c8d65cf0aa4ab, type: 3}
+    - {fileID: -414921334540547795, guid: 01e14ef2e15d54fb1b5c8d65cf0aa4ab, type: 3}
+    - {fileID: 4835078630258379571, guid: 01e14ef2e15d54fb1b5c8d65cf0aa4ab, type: 3}
+    scale: {x: 0, y: 0, z: 0}
+  - name: Casual3_Male
+    mesh: {fileID: 2959467708922500008, guid: cc26d46fefb184ad9b6748e95594ed78, type: 3}
+    materials:
+    - {fileID: -1536519034987021355, guid: cc26d46fefb184ad9b6748e95594ed78, type: 3}
+    - {fileID: -2274090305892019849, guid: cc26d46fefb184ad9b6748e95594ed78, type: 3}
+    - {fileID: -4288583467269203127, guid: cc26d46fefb184ad9b6748e95594ed78, type: 3}
+    - {fileID: -5637652675625914632, guid: cc26d46fefb184ad9b6748e95594ed78, type: 3}
+    - {fileID: -414921334540547795, guid: cc26d46fefb184ad9b6748e95594ed78, type: 3}
+    - {fileID: 4835078630258379571, guid: cc26d46fefb184ad9b6748e95594ed78, type: 3}
+    scale: {x: 0, y: 0, z: 0}
+  - name: Casual_Bald
+    mesh: {fileID: 2959467708922500008, guid: f3d200d51a7004de08ca13a7600e24b5, type: 3}
+    materials:
+    - {fileID: -1536519034987021355, guid: f3d200d51a7004de08ca13a7600e24b5, type: 3}
+    - {fileID: -2274090305892019849, guid: f3d200d51a7004de08ca13a7600e24b5, type: 3}
+    - {fileID: -5637652675625914632, guid: f3d200d51a7004de08ca13a7600e24b5, type: 3}
+    - {fileID: -414921334540547795, guid: f3d200d51a7004de08ca13a7600e24b5, type: 3}
+    - {fileID: 4835078630258379571, guid: f3d200d51a7004de08ca13a7600e24b5, type: 3}
+    scale: {x: 0, y: 0, z: 0}
+  - name: Casual_Female
+    mesh: {fileID: 2959467708922500008, guid: 239719c48803b4c5db14e79b64a85f93, type: 3}
+    materials:
+    - {fileID: -1756283593641338864, guid: 239719c48803b4c5db14e79b64a85f93, type: 3}
+    - {fileID: 9054928168843377129, guid: 239719c48803b4c5db14e79b64a85f93, type: 3}
+    - {fileID: -7320176457369531542, guid: 239719c48803b4c5db14e79b64a85f93, type: 3}
+    - {fileID: -2274090305892019849, guid: 239719c48803b4c5db14e79b64a85f93, type: 3}
+    - {fileID: -640063867121917104, guid: 239719c48803b4c5db14e79b64a85f93, type: 3}
+    - {fileID: -4245119772211814133, guid: 239719c48803b4c5db14e79b64a85f93, type: 3}
+    - {fileID: 4835078630258379571, guid: 239719c48803b4c5db14e79b64a85f93, type: 3}
+    scale: {x: 0, y: 0, z: 0}
+  - name: Cowboy_Male
+    mesh: {fileID: 2959467708922500008, guid: 3134be5298ef54c189f990907d4a36e4, type: 3}
+    materials:
+    - {fileID: -2274090305892019849, guid: 3134be5298ef54c189f990907d4a36e4, type: 3}
+    - {fileID: -4288583467269203127, guid: 3134be5298ef54c189f990907d4a36e4, type: 3}
+    - {fileID: -4176385863467449410, guid: 3134be5298ef54c189f990907d4a36e4, type: 3}
+    - {fileID: 8014156386276071201, guid: 3134be5298ef54c189f990907d4a36e4, type: 3}
+    - {fileID: -8991921274265608775, guid: 3134be5298ef54c189f990907d4a36e4, type: 3}
+    - {fileID: -5637652675625914632, guid: 3134be5298ef54c189f990907d4a36e4, type: 3}
+    - {fileID: 726272576889566651, guid: 3134be5298ef54c189f990907d4a36e4, type: 3}
+    - {fileID: 4835078630258379571, guid: 3134be5298ef54c189f990907d4a36e4, type: 3}
+    - {fileID: -1293887620268828351, guid: 3134be5298ef54c189f990907d4a36e4, type: 3}
+    scale: {x: 0, y: 0, z: 0}
+  - name: Doctor_Female_Old
+    mesh: {fileID: 2959467708922500008, guid: 01fcf12682457421ebe7b8c703674a87, type: 3}
+    materials:
+    - {fileID: -1580535799172915004, guid: 01fcf12682457421ebe7b8c703674a87, type: 3}
+    - {fileID: -4770390735465466038, guid: 01fcf12682457421ebe7b8c703674a87, type: 3}
+    - {fileID: -2274090305892019849, guid: 01fcf12682457421ebe7b8c703674a87, type: 3}
+    - {fileID: -4288583467269203127, guid: 01fcf12682457421ebe7b8c703674a87, type: 3}
+    - {fileID: 2781410738928257789, guid: 01fcf12682457421ebe7b8c703674a87, type: 3}
+    - {fileID: 4835078630258379571, guid: 01fcf12682457421ebe7b8c703674a87, type: 3}
+    scale: {x: 0, y: 0, z: 0}
+  - name: Elf
+    mesh: {fileID: 2959467708922500008, guid: 7c0c015bd36e4414bb7727f10ad9af14, type: 3}
+    materials:
+    - {fileID: -1536519034987021355, guid: 7c0c015bd36e4414bb7727f10ad9af14, type: 3}
+    - {fileID: 9054928168843377129, guid: 7c0c015bd36e4414bb7727f10ad9af14, type: 3}
+    - {fileID: -2274090305892019849, guid: 7c0c015bd36e4414bb7727f10ad9af14, type: 3}
+    - {fileID: -905690159841262435, guid: 7c0c015bd36e4414bb7727f10ad9af14, type: 3}
+    - {fileID: -640063867121917104, guid: 7c0c015bd36e4414bb7727f10ad9af14, type: 3}
+    - {fileID: 4835078630258379571, guid: 7c0c015bd36e4414bb7727f10ad9af14, type: 3}
+    scale: {x: 0, y: 0, z: 0}
+  - name: Kimono_Male
+    mesh: {fileID: 2959467708922500008, guid: e162ccfd48fb344ae89a7982b5fea89d, type: 3}
+    materials:
+    - {fileID: -1756283593641338864, guid: e162ccfd48fb344ae89a7982b5fea89d, type: 3}
+    - {fileID: 9054928168843377129, guid: e162ccfd48fb344ae89a7982b5fea89d, type: 3}
+    - {fileID: -2274090305892019849, guid: e162ccfd48fb344ae89a7982b5fea89d, type: 3}
+    - {fileID: 4835078630258379571, guid: e162ccfd48fb344ae89a7982b5fea89d, type: 3}
+    scale: {x: 0, y: 0, z: 0}
+  - name: Knight_Golden_Male
+    mesh: {fileID: 2959467708922500008, guid: 644712bd25df646118ab2f2b5847b479, type: 3}
+    materials:
+    - {fileID: 7968186905521774943, guid: 644712bd25df646118ab2f2b5847b479, type: 3}
+    - {fileID: 1566755324555150303, guid: 644712bd25df646118ab2f2b5847b479, type: 3}
+    - {fileID: -3785157216125183173, guid: 644712bd25df646118ab2f2b5847b479, type: 3}
+    - {fileID: -382652638819485698, guid: 644712bd25df646118ab2f2b5847b479, type: 3}
+    - {fileID: 4835078630258379571, guid: 644712bd25df646118ab2f2b5847b479, type: 3}
+    scale: {x: 0, y: 0, z: 0}
+  - name: Ninja_Female
+    mesh: {fileID: 2959467708922500008, guid: 1a28c32875fa54bd3ab5e8ccc9790917, type: 3}
+    materials:
+    - {fileID: -3303489080311633890, guid: 1a28c32875fa54bd3ab5e8ccc9790917, type: 3}
+    - {fileID: -2274090305892019849, guid: 1a28c32875fa54bd3ab5e8ccc9790917, type: 3}
+    - {fileID: -5243988174349660497, guid: 1a28c32875fa54bd3ab5e8ccc9790917, type: 3}
+    - {fileID: -4288583467269203127, guid: 1a28c32875fa54bd3ab5e8ccc9790917, type: 3}
+    - {fileID: 2781410738928257789, guid: 1a28c32875fa54bd3ab5e8ccc9790917, type: 3}
+    - {fileID: 4835078630258379571, guid: 1a28c32875fa54bd3ab5e8ccc9790917, type: 3}
+    scale: {x: 0, y: 0, z: 0}
+  - name: Ninja_Male
+    mesh: {fileID: 2959467708922500008, guid: bce0c8e8f431e44b181df7fa400784f2, type: 3}
+    materials:
+    - {fileID: -3303489080311633890, guid: 1a28c32875fa54bd3ab5e8ccc9790917, type: 3}
+    - {fileID: -2274090305892019849, guid: 1a28c32875fa54bd3ab5e8ccc9790917, type: 3}
+    - {fileID: -5243988174349660497, guid: 1a28c32875fa54bd3ab5e8ccc9790917, type: 3}
+    - {fileID: 2781410738928257789, guid: bce0c8e8f431e44b181df7fa400784f2, type: 3}
+    - {fileID: 4835078630258379571, guid: bce0c8e8f431e44b181df7fa400784f2, type: 3}
+    scale: {x: 0, y: 0, z: 0}
+  - name: Ninja_Sand_Female
+    mesh: {fileID: 2959467708922500008, guid: 3b5ccf2f69b0e47d49edf5b3b39bb0a1, type: 3}
+    materials:
+    - {fileID: -2867747967464863736, guid: 3b5ccf2f69b0e47d49edf5b3b39bb0a1, type: 3}
+    - {fileID: -3303489080311633890, guid: 3b5ccf2f69b0e47d49edf5b3b39bb0a1, type: 3}
+    - {fileID: -2274090305892019849, guid: 3b5ccf2f69b0e47d49edf5b3b39bb0a1, type: 3}
+    - {fileID: -4288583467269203127, guid: 3b5ccf2f69b0e47d49edf5b3b39bb0a1, type: 3}
+    - {fileID: 2781410738928257789, guid: 3b5ccf2f69b0e47d49edf5b3b39bb0a1, type: 3}
+    - {fileID: 4835078630258379571, guid: 3b5ccf2f69b0e47d49edf5b3b39bb0a1, type: 3}
+    scale: {x: 0, y: 0, z: 0}
+  - name: OldClassy_Male
+    mesh: {fileID: 2959467708922500008, guid: f29b8fa41aa7c4bb5a94f7e1ee25e3ca, type: 3}
+    materials:
+    - {fileID: -1536519034987021355, guid: f29b8fa41aa7c4bb5a94f7e1ee25e3ca, type: 3}
+    - {fileID: -3785157216125183173, guid: f29b8fa41aa7c4bb5a94f7e1ee25e3ca, type: 3}
+    - {fileID: -2274090305892019849, guid: f29b8fa41aa7c4bb5a94f7e1ee25e3ca, type: 3}
+    - {fileID: -4288583467269203127, guid: f29b8fa41aa7c4bb5a94f7e1ee25e3ca, type: 3}
+    - {fileID: -640063867121917104, guid: f29b8fa41aa7c4bb5a94f7e1ee25e3ca, type: 3}
+    - {fileID: -5637652675625914632, guid: f29b8fa41aa7c4bb5a94f7e1ee25e3ca, type: 3}
+    - {fileID: -414921334540547795, guid: f29b8fa41aa7c4bb5a94f7e1ee25e3ca, type: 3}
+    - {fileID: 4835078630258379571, guid: f29b8fa41aa7c4bb5a94f7e1ee25e3ca, type: 3}
+    scale: {x: 0, y: 0, z: 0}
+  - name: Pirate_Female
+    mesh: {fileID: 2959467708922500008, guid: eb3d62d09327142e98269daa9647a002, type: 3}
+    materials:
+    - {fileID: -2867747967464863736, guid: eb3d62d09327142e98269daa9647a002, type: 3}
+    - {fileID: -1580535799172915004, guid: eb3d62d09327142e98269daa9647a002, type: 3}
+    - {fileID: -4770390735465466038, guid: eb3d62d09327142e98269daa9647a002, type: 3}
+    - {fileID: 9054928168843377129, guid: eb3d62d09327142e98269daa9647a002, type: 3}
+    - {fileID: -2274090305892019849, guid: eb3d62d09327142e98269daa9647a002, type: 3}
+    - {fileID: -905690159841262435, guid: eb3d62d09327142e98269daa9647a002, type: 3}
+    - {fileID: -4288583467269203127, guid: eb3d62d09327142e98269daa9647a002, type: 3}
+    - {fileID: -382652638819485698, guid: eb3d62d09327142e98269daa9647a002, type: 3}
+    - {fileID: 4835078630258379571, guid: eb3d62d09327142e98269daa9647a002, type: 3}
+    scale: {x: 0, y: 0, z: 0}
+  - name: Soldier_Female
+    mesh: {fileID: 2959467708922500008, guid: bd3ddba0188fd4ab98da6b8bd850fbb0, type: 3}
+    materials:
+    - {fileID: -1580535799172915004, guid: bd3ddba0188fd4ab98da6b8bd850fbb0, type: 3}
+    - {fileID: -8753481769234136891, guid: bd3ddba0188fd4ab98da6b8bd850fbb0, type: 3}
+    - {fileID: -2274090305892019849, guid: bd3ddba0188fd4ab98da6b8bd850fbb0, type: 3}
+    - {fileID: -4288583467269203127, guid: bd3ddba0188fd4ab98da6b8bd850fbb0, type: 3}
+    - {fileID: 2781410738928257789, guid: bd3ddba0188fd4ab98da6b8bd850fbb0, type: 3}
+    - {fileID: 4835078630258379571, guid: bd3ddba0188fd4ab98da6b8bd850fbb0, type: 3}
+    scale: {x: 0, y: 0, z: 0}
+  - name: Suit_Female
+    mesh: {fileID: 2959467708922500008, guid: 312581a574fb846bd97f363a0dd65ffd, type: 3}
+    materials:
+    - {fileID: -1536519034987021355, guid: 312581a574fb846bd97f363a0dd65ffd, type: 3}
+    - {fileID: -1580535799172915004, guid: 312581a574fb846bd97f363a0dd65ffd, type: 3}
+    - {fileID: -3303489080311633890, guid: 312581a574fb846bd97f363a0dd65ffd, type: 3}
+    - {fileID: -2274090305892019849, guid: 312581a574fb846bd97f363a0dd65ffd, type: 3}
+    - {fileID: -4288583467269203127, guid: 312581a574fb846bd97f363a0dd65ffd, type: 3}
+    - {fileID: -414921334540547795, guid: 312581a574fb846bd97f363a0dd65ffd, type: 3}
+    - {fileID: 4835078630258379571, guid: 312581a574fb846bd97f363a0dd65ffd, type: 3}
+    scale: {x: 0, y: 0, z: 0}
+  - name: Suit_Male
+    mesh: {fileID: 2959467708922500008, guid: 7f8ddace589984653b0ddd2c66f00925, type: 3}
+    materials:
+    - {fileID: -1536519034987021355, guid: 7f8ddace589984653b0ddd2c66f00925, type: 3}
+    - {fileID: -1580535799172915004, guid: 7f8ddace589984653b0ddd2c66f00925, type: 3}
+    - {fileID: -3303489080311633890, guid: 7f8ddace589984653b0ddd2c66f00925, type: 3}
+    - {fileID: -2274090305892019849, guid: 7f8ddace589984653b0ddd2c66f00925, type: 3}
+    - {fileID: -4288583467269203127, guid: 7f8ddace589984653b0ddd2c66f00925, type: 3}
+    - {fileID: -414921334540547795, guid: 7f8ddace589984653b0ddd2c66f00925, type: 3}
+    - {fileID: 4835078630258379571, guid: 7f8ddace589984653b0ddd2c66f00925, type: 3}
+    scale: {x: 0, y: 0, z: 0}
+  - name: Witch
+    mesh: {fileID: 2959467708922500008, guid: 13aadb62bfe6a4cc1962ba3b7ce070b9, type: 3}
+    materials:
+    - {fileID: -1536519034987021355, guid: 13aadb62bfe6a4cc1962ba3b7ce070b9, type: 3}
+    - {fileID: 9054928168843377129, guid: 13aadb62bfe6a4cc1962ba3b7ce070b9, type: 3}
+    - {fileID: -2274090305892019849, guid: 13aadb62bfe6a4cc1962ba3b7ce070b9, type: 3}
+    - {fileID: -905690159841262435, guid: 13aadb62bfe6a4cc1962ba3b7ce070b9, type: 3}
+    - {fileID: -4288583467269203127, guid: 13aadb62bfe6a4cc1962ba3b7ce070b9, type: 3}
+    - {fileID: -640063867121917104, guid: 13aadb62bfe6a4cc1962ba3b7ce070b9, type: 3}
+    - {fileID: 4835078630258379571, guid: 13aadb62bfe6a4cc1962ba3b7ce070b9, type: 3}
+    scale: {x: 0, y: 0, z: 0}
+  - name: Worker_Male
+    mesh: {fileID: 2959467708922500008, guid: 427d43b1097bf45cdbfdf36d24c35a9a, type: 3}
+    materials:
+    - {fileID: -2274090305892019849, guid: 427d43b1097bf45cdbfdf36d24c35a9a, type: 3}
+    - {fileID: -640063867121917104, guid: 427d43b1097bf45cdbfdf36d24c35a9a, type: 3}
+    - {fileID: -5637652675625914632, guid: 427d43b1097bf45cdbfdf36d24c35a9a, type: 3}
+    - {fileID: -414921334540547795, guid: 427d43b1097bf45cdbfdf36d24c35a9a, type: 3}
+    - {fileID: 4835078630258379571, guid: 427d43b1097bf45cdbfdf36d24c35a9a, type: 3}
+    - {fileID: 6700964304242956282, guid: 427d43b1097bf45cdbfdf36d24c35a9a, type: 3}
+    scale: {x: 0, y: 0, z: 0}
+--- !u!4 &469715290
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469715288}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1034020649
 GameObject:
   m_ObjectHideFlags: 0
@@ -978,3 +1266,4 @@ SceneRoots:
   - {fileID: 1227949634}
   - {fileID: 116041547}
   - {fileID: 378986041}
+  - {fileID: 469715290}

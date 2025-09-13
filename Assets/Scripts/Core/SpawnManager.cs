@@ -192,10 +192,16 @@ namespace HideAndSeek.Core
 
             GameObject npc = npcPool.Dequeue();
             Vector3 spawnPosition = GetRandomPositionInZone(zone);
+            var meshMaterialManager = MeshMaterialManager.Instance;
 
             npc.transform.position = spawnPosition;
             npc.transform.rotation = Quaternion.Euler(0, UnityEngine.Random.Range(0f, 360f), 0);
             npc.AddComponent<HideAndSeek.NPC.AIController>();
+            meshMaterialManager.ApplyMeshMaterial(
+                npc.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>(),
+                meshMaterialManager.GetRandomMeshMaterial()
+                );
+
             npc.SetActive(true);
 
             spawnedNPCs.Add(npc);
@@ -212,10 +218,15 @@ namespace HideAndSeek.Core
 
             GameObject npc = npcPool.Dequeue();
             Vector3 spawnPosition = GetRandomSpawnPosition();
+            var meshMaterialManager = MeshMaterialManager.Instance;
 
             npc.transform.position = spawnPosition;
             npc.transform.rotation = Quaternion.Euler(0, UnityEngine.Random.Range(0f, 360f), 0);
             npc.AddComponent<HideAndSeek.NPC.AIController>();
+            meshMaterialManager.ApplyMeshMaterial(
+                npc.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>(),
+                meshMaterialManager.GetRandomMeshMaterial()
+                );
             npc.SetActive(true);
 
             spawnedNPCs.Add(npc);
