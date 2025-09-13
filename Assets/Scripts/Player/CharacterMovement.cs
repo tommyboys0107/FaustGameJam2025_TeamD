@@ -1,5 +1,5 @@
-using UnityEngine;
 using HideAndSeek.Data;
+using UnityEngine;
 
 namespace HideAndSeek.Player
 {
@@ -14,43 +14,36 @@ namespace HideAndSeek.Player
         [SerializeField] private float rotationSpeed = 720f;
         [SerializeField] private float acceleration = 10f;
         [SerializeField] private float deceleration = 10f;
-        
-        [Header("Ground Detection")]
-        [SerializeField] private float groundCheckDistance = 0.1f;
-        [SerializeField] private LayerMask groundLayer = 1;
-        
+
         // Components
         private CharacterController characterController;
         private Animator animator;
-        
+
         // Movement state
         private Vector3 currentVelocity;
         private Vector3 targetVelocity;
-        private bool isGrounded;
-        
+
         // Properties
         public Vector3 Velocity => currentVelocity;
-        public bool IsGrounded => isGrounded;
         public bool IsMoving => currentVelocity.magnitude > 0.1f;
         public float Speed => currentVelocity.magnitude;
-        
+
         private void Awake()
         {
             InitializeComponents();
         }
-        
+
         private void Start()
         {
             LoadSettingsFromGameManager();
         }
-        
+
         private void Update()
         {
-            UpdateGroundCheck();
             UpdateMovement();
             UpdateAnimations();
         }
-        
+
         private void InitializeComponents()
         {
             characterController = GetComponent<CharacterController>();
@@ -59,10 +52,10 @@ namespace HideAndSeek.Player
                 characterController = gameObject.AddComponent<CharacterController>();
                 Debug.LogWarning("CharacterController was missing and has been added automatically.");
             }
-            
+
             animator = GetComponentInChildren<Animator>();
         }
-        
+
         private void LoadSettingsFromGameManager()
         {
             var gameSettings = Core.GameManager.Instance?.GetGameSettings();
@@ -72,55 +65,37 @@ namespace HideAndSeek.Player
                 rotationSpeed = gameSettings.playerRotationSpeed;
             }
         }
-        
-        private void UpdateGroundCheck()
-        {
-            // Check if character controller is grounded
-            isGrounded = characterController.isGrounded;
-            
-            // Additional ground check using raycast for more precise detection
-            if (!isGrounded)
-            {
-                Ray ray = new Ray(transform.position + Vector3.up * 0.1f, Vector3.down);
-                isGrounded = Physics.Raycast(ray, groundCheckDistance + 0.1f, groundLayer);
-            }
-        }
-        
+
         private void UpdateMovement()
         {
             // Smoothly interpolate velocity
-            currentVelocity = Vector3.MoveTowards(currentVelocity, targetVelocity, 
+            currentVelocity = Vector3.MoveTowards(currentVelocity, targetVelocity,
                 (targetVelocity.magnitude > currentVelocity.magnitude ? acceleration : deceleration) * Time.deltaTime);
-            
+
             // Apply gravity if not grounded
-            if (!isGrounded)
-            {
-                currentVelocity.y -= 9.81f * Time.deltaTime;
-            }
-            else if (currentVelocity.y < 0)
+            if (currentVelocity.y < 0)
             {
                 currentVelocity.y = 0;
             }
-            
+
             // Move the character
             if (characterController.enabled)
             {
                 characterController.Move(currentVelocity * Time.deltaTime);
             }
         }
-        
+
         private void UpdateAnimations()
         {
             if (animator == null) return;
-            
+
             // Update animator parameters for movement
             animator.SetFloat("Speed", Speed);
             animator.SetFloat("VelocityX", currentVelocity.x);
             animator.SetFloat("VelocityZ", currentVelocity.z);
-            animator.SetBool("IsGrounded", isGrounded);
             animator.SetBool("IsMoving", IsMoving);
         }
-        
+
         /// <summary>
         /// Set the target movement direction and speed
         /// </summary>
@@ -131,7 +106,7 @@ namespace HideAndSeek.Player
             direction.y = 0; // Remove any Y component
             targetVelocity = direction.normalized * moveSpeed * Mathf.Clamp01(speedMultiplier);
         }
-        
+
         /// <summary>
         /// Set movement directly with a velocity vector
         /// </summary>
@@ -141,7 +116,7 @@ namespace HideAndSeek.Player
             velocity.y = currentVelocity.y; // Preserve Y velocity for gravity
             targetVelocity = velocity;
         }
-        
+
         /// <summary>
         /// Rotate the character to face a direction
         /// </summary>
@@ -150,21 +125,21 @@ namespace HideAndSeek.Player
         public void RotateTowardsDirection(Vector3 direction, bool immediate = false)
         {
             if (direction.magnitude < 0.1f) return;
-            
+
             direction.y = 0; // Remove Y component
             Quaternion targetRotation = Quaternion.LookRotation(direction);
-            
+
             if (immediate)
             {
                 transform.rotation = targetRotation;
             }
             else
             {
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, 
+                transform.rotation = Quaternion.RotateTowards(transform.rotation,
                     targetRotation, rotationSpeed * Time.deltaTime);
             }
         }
-        
+
         /// <summary>
         /// Stop all movement immediately
         /// </summary>
@@ -173,7 +148,7 @@ namespace HideAndSeek.Player
             targetVelocity = Vector3.zero;
             currentVelocity = new Vector3(0, currentVelocity.y, 0); // Preserve Y for gravity
         }
-        
+
         /// <summary>
         /// Add an impulse force to the character
         /// </summary>
@@ -182,7 +157,7 @@ namespace HideAndSeek.Player
         {
             currentVelocity += force;
         }
-        
+
         /// <summary>
         /// Teleport the character to a position
         /// </summary>
@@ -195,35 +170,30 @@ namespace HideAndSeek.Player
             currentVelocity = Vector3.zero;
             targetVelocity = Vector3.zero;
         }
-        
+
         /// <summary>
         /// Update movement settings from game settings
         /// </summary>
         public void UpdateMovementSettings(GameSettings gameSettings)
         {
             if (gameSettings == null) return;
-            
+
             moveSpeed = gameSettings.playerMoveSpeed;
             rotationSpeed = gameSettings.playerRotationSpeed;
         }
-        
+
         // Debug methods
         private void OnDrawGizmosSelected()
         {
-            // Draw ground check ray
-            Gizmos.color = isGrounded ? Color.green : Color.red;
-            Vector3 rayStart = transform.position + Vector3.up * 0.1f;
-            Gizmos.DrawRay(rayStart, Vector3.down * (groundCheckDistance + 0.1f));
-            
             // Draw velocity vector
             Gizmos.color = Color.blue;
             Gizmos.DrawRay(transform.position, currentVelocity);
-            
+
             // Draw target velocity
             Gizmos.color = Color.cyan;
             Gizmos.DrawRay(transform.position + Vector3.up * 0.5f, targetVelocity);
         }
-        
+
         private void OnValidate()
         {
             // Ensure positive values
@@ -231,7 +201,6 @@ namespace HideAndSeek.Player
             rotationSpeed = Mathf.Max(1f, rotationSpeed);
             acceleration = Mathf.Max(0.1f, acceleration);
             deceleration = Mathf.Max(0.1f, deceleration);
-            groundCheckDistance = Mathf.Max(0.01f, groundCheckDistance);
         }
     }
 }
