@@ -164,23 +164,6 @@ public class LightingController : MonoBehaviour
 }
 ```
 
-#### 3.4.2 場景區域管理 (AreaManager)
-```csharp
-public class AreaManager : MonoBehaviour
-{
-    public enum AreaType { DanceFloor, Bar, VIP, Corridor }
-
-    [Header("Area Settings")]
-    public AreaType areaType;
-    public int npcDensity;
-    public float lightCoverage;
-    public float detectability; // 此區域的可檢測性
-
-    private List<GameObject> npcsInArea;
-    private List<PlayerController> playersInArea;
-}
-```
-
 ### 3.5 NPC系統 (NPCSystem)
 
 #### 3.5.1 NPC控制器
@@ -280,23 +263,6 @@ public class UIManager : MonoBehaviour
 }
 ```
 
-#### 3.7.2 HUD系統
-```csharp
-public class HUDController : MonoBehaviour
-{
-    [Header("HUD Elements")]
-    public Image cooldownIndicator;
-    public Text actionPrompt;
-    public Text suspicionMeter;
-
-    private PlayerController player;
-
-    public void UpdateCooldownDisplay(float progress)
-    public void ShowActionPrompt(string action)
-    public void UpdateSuspicionLevel(float level)
-}
-```
-
 ### 3.8 計分系統 (ScoreSystem)
 
 #### 3.8.1 分數管理器
@@ -350,19 +316,6 @@ public class SceneConfiguration : ScriptableObject
     public float lightRotationSpeed = 30f;
     public AnimationCurve intensityCurve;
 
-    [Header("Areas")]
-    public AreaData[] areas;
-}
-
-[System.Serializable]
-public class AreaData
-{
-    public string areaName;
-    public AreaManager.AreaType type;
-    public Vector3 centerPosition;
-    public Vector3 size;
-    public int npcDensity;
-    public float detectability;
 }
 ```
 
