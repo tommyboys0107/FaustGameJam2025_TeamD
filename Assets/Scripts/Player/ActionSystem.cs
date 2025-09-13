@@ -330,20 +330,20 @@ namespace HideAndSeek.Player
         }
         
         // Debug visualization
-        private void OnDrawGizmosSelected()
-        {
-            // Draw interaction range
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, interactionRange);
+        //private void OnDrawGizmosSelected()
+        //{
+        //    // Draw interaction range
+        //    Gizmos.color = Color.yellow;
+        //    Gizmos.DrawWireSphere(transform.position, interactionRange);
             
-            // Draw line to current target
-            GameObject target = GetCurrentTarget();
-            if (target != null)
-            {
-                Gizmos.color = Color.red;
-                Gizmos.DrawLine(transform.position, target.transform.position);
-            }
-        }
+        //    // Draw line to current target
+        //    GameObject target = GetCurrentTarget();
+        //    if (target != null)
+        //    {
+        //        Gizmos.color = Color.red;
+        //        Gizmos.DrawLine(transform.position, target.transform.position);
+        //    }
+        //}
         
         private void OnValidate()
         {

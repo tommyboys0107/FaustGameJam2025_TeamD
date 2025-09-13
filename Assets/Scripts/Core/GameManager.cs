@@ -1,6 +1,7 @@
+using HideAndSeek.Data;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using HideAndSeek.Data;
 using HideAndSeek.Player;
 
 namespace HideAndSeek.Core
@@ -95,6 +96,11 @@ namespace HideAndSeek.Core
             killCount = 0;
         }
 
+        private void Start()
+        {
+            StartGame();
+        }
+
         private void Update()
         {
             if (currentState == GameState.Playing)
@@ -117,7 +123,12 @@ namespace HideAndSeek.Core
         public void StartGame()
         {
             if (currentState != GameState.Menu) return;
-            
+
+            // 生成角色
+            SpawnManager.Instance.OnSpawnComplete.AddListener(OnSpawnNPCFinish);
+            SpawnManager.Instance.SpawnNPCs();
+
+
             currentState = GameState.Playing;
             currentGameTime = 0f;
             killCount = 0;
@@ -158,10 +169,15 @@ namespace HideAndSeek.Core
 
         public void AssignPlayerRoles(GameObject killer, GameObject police)
         {
-            killerPlayer = killer;
-            policePlayer = police;
-            
-            Debug.Log($"Roles assigned - Killer: {killer.name}, Police: {police.name}");
+            if (killer != null)
+            {
+                killerPlayer = killer;
+            }
+
+            if (police != null)
+            {
+                policePlayer = police;
+            }
         }
 
         public void AddKill()
@@ -184,6 +200,27 @@ namespace HideAndSeek.Core
         public void SetGameSettings(GameSettings settings)
         {
             gameSettings = settings;
+        }
+
+        private void OnSpawnNPCFinish()
+        {
+            // 設定玩家角色
+            List<GameObject> npcs = SpawnManager.Instance.GetRandomNPCs(2);
+            AssignPlayerRoles(npcs[0], npcs[1]);
+            for (int i = 0; i < npcs.Count; i++)
+            {
+                Destroy(npcs[i].GetComponent<HideAndSeek.NPC.AIController>());
+                if (i == 0)
+                {
+                    npcs[i].AddComponent<HideAndSeek.Player.PlayerController>().SetPlayerRole(PlayerRole.Killer);
+                    npcs[i].AddComponent<HideAndSeek.Player.PlayerInputTraditional>().SetPlayerID((int)PlayerRole.Killer + 1);
+                }
+                else if (i == 1)
+                {
+                    npcs[i].AddComponent<HideAndSeek.Player.PlayerController>().SetPlayerRole(PlayerRole.Police);
+                    npcs[i].AddComponent<HideAndSeek.Player.PlayerInputTraditional>().SetPlayerID((int)PlayerRole.Police + 1);
+                }
+            }
         }
     }
 }
