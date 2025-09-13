@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using HideAndSeek.Player;
+using UnityEngine.UI;
 
 namespace HideAndSeek.Core
 {
@@ -19,6 +20,9 @@ namespace HideAndSeek.Core
         // Fallback values if no settings asset is assigned
         [SerializeField] private float defaultGameTime = 300f;
         [SerializeField] private int defaultMaxKills = 10;
+
+        [Header("UI")]
+        [SerializeField] private Text killScoreText;
         
         // Singleton instance
         private static GameManager _instance;
@@ -69,8 +73,7 @@ namespace HideAndSeek.Core
         private GameObject policePlayer;
         
         // Game statistics
-        private int killCount = 0;
-        public int KillCount => killCount;
+        private int killScore = 0;
 
         private void Awake()
         {
@@ -93,7 +96,7 @@ namespace HideAndSeek.Core
         {
             currentState = GameState.Menu;
             currentGameTime = 0f;
-            killCount = 0;
+            updateKillScore(0);
         }
 
         private void Start()
@@ -120,6 +123,12 @@ namespace HideAndSeek.Core
             //TODO
         }
 
+        private void updateKillScore(int core)
+        {
+            killScore = core;
+            killScoreText.text = core.ToString();
+        }
+
         public void StartGame()
         {
             if (currentState != GameState.Menu) return;
@@ -131,7 +140,7 @@ namespace HideAndSeek.Core
 
             currentState = GameState.Playing;
             currentGameTime = 0f;
-            killCount = 0;
+            updateKillScore(0);
             
             OnGameStart?.Invoke();
             Debug.Log("Game Started!");
@@ -162,7 +171,7 @@ namespace HideAndSeek.Core
         {
             currentState = GameState.Menu;
             currentGameTime = 0f;
-            killCount = 0;
+            updateKillScore(0);
             
             Debug.Log("Game Restarted!");
         }
@@ -184,7 +193,7 @@ namespace HideAndSeek.Core
         {
             if (currentState != GameState.Playing) return;
             
-            killCount++;
+            updateKillScore(killScore + gameSettings.killBaseScore);
         }
 
         public GameObject GetPlayerByRole(PlayerRole role)
