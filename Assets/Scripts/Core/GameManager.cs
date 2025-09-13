@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using HideAndSeek.Data;
+using HideAndSeek.Player;
 
 namespace HideAndSeek.Core
 {
@@ -128,7 +129,17 @@ namespace HideAndSeek.Core
         public void EndGame(PlayerRole winner)
         {
             if (currentState != GameState.Playing) return;
-            
+
+            var players = GameObject.FindObjectsByType<PlayerInputTraditional>(FindObjectsSortMode.None);
+            foreach(var p in players)
+            {
+                p.enabled = false;
+            }
+            var npcs = GameObject.FindObjectsOfType<HideAndSeek.NPC.AIController>();
+            foreach (var npc in npcs)
+            {
+                npc.enabled = false;
+            }
             currentState = GameState.GameOver;
             OnGameEnd?.Invoke();
             OnGameWin?.Invoke(winner);
