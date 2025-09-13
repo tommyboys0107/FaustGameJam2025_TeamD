@@ -542,11 +542,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6701e76abe11954db416a4f00c2f4e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcPrefab: {fileID: 4991512300739663450, guid: 8c3041cc03be6624c9a4e29be705abd0, type: 3}
+  npcPrefab: {fileID: 1896028595090918233, guid: 8c3041cc03be6624c9a4e29be705abd0, type: 3}
   spawnParent: {fileID: 0}
-  minSpawnRadius: 50
-  maxSpawnRadius: 500
-  minSpawnDistance: 2
+  minSpawnRadius: 1
+  maxSpawnRadius: 10
+  minSpawnDistance: 1
   OnSpawnStart:
     m_PersistentCalls:
       m_Calls: []
