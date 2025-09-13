@@ -90,8 +90,7 @@ namespace HideAndSeek.Player
             GameObject target = FindNearestTarget(npcLayer);
             if (target != null)
             {
-                if (target.GetComponent<ActionSystem>().GetComponent<PlayerController>().PlayerRole 
-                    != GameManager.PlayerRole.Police) // can't kill police
+                if (!target.GetComponent<PlayerController>()) // can't kill police
                 {
                     StartCoroutine(PerformKillCoroutine(target));
                 }
