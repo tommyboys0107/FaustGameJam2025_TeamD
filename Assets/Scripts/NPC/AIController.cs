@@ -18,7 +18,8 @@ namespace HideAndSeek.NPC
         [Header("State Settings")]
         [Range(0, 1)]
         [SerializeField] private float dancingProb = 0.7f;
-        [SerializeField] private float stateUpdatedTime = 10f;
+        [SerializeField] private float stateUpdatedMinTime = 3f;
+        [SerializeField] private float stateUpdatedMaxTime = 10f;
         private float nextTime;
         private NPCState nowState = NPCState.Idle;
 
@@ -38,7 +39,7 @@ namespace HideAndSeek.NPC
         private void Start()
         {
             LoadSettingsFromGameManager();
-            nextTime = stateUpdatedTime;
+            nextTime = Random.Range(stateUpdatedMinTime, stateUpdatedMaxTime);
         }
 
         private void Update()
@@ -83,7 +84,7 @@ namespace HideAndSeek.NPC
                         break;
                 }
 
-                nextTime = stateUpdatedTime;
+                nextTime = Random.Range(stateUpdatedMinTime, stateUpdatedMaxTime);
             }
         }
 
