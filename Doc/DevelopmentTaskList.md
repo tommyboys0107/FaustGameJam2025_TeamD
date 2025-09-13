@@ -19,12 +19,12 @@
 - [ ] 1.5 配置Git版本控制和.gitignore
 
 #### 2. 遊戲管理系統 (GameManager)
-- [ ] 2.1 實作GameManager單例模式
-- [ ] 2.2 建立遊戲狀態機 (Menu, Playing, GameOver)
-- [ ] 2.3 實作玩家角色分配系統 (Killer/Police)
-- [ ] 2.4 建立遊戲時間控制機制
-- [ ] 2.5 實作勝負條件判定邏輯
-- [ ] 2.6 建立GameSettings ScriptableObject
+- [x] 2.1 實作GameManager單例模式
+- [x] 2.2 建立遊戲狀態機 (Menu, Playing, GameOver)
+- [x] 2.3 實作玩家角色分配系統 (Killer/Police)
+- [x] 2.4 建立遊戲時間控制機制
+- [x] 2.5 實作勝負條件判定邏輯
+- [x] 2.6 建立GameSettings ScriptableObject
 
 #### 3. 角色控制系統 (PlayerController)
 - [ ] 3.1 建立PlayerController基礎類別
