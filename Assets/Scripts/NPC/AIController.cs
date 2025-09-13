@@ -30,11 +30,6 @@ namespace HideAndSeek.NPC
         // Movement 
         private Vector2 movementInput;
 
-        // Properties
-        public Vector3 Velocity => currentVelocity;
-        public bool IsMoving => currentVelocity.magnitude > 0.1f;
-        public float Speed => currentVelocity.magnitude;
-
         private void Awake()
         {
             InitializeComponents();
