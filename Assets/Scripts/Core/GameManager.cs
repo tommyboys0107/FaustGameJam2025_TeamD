@@ -25,6 +25,7 @@ namespace HideAndSeek.Core
         [Header("UI")]
         [SerializeField] private Text killScoreText;
         [SerializeField] private Image comboBar;
+        [SerializeField] private Text gameTimeText;
 
         // Singleton instance
         private static GameManager _instance;
@@ -67,7 +68,6 @@ namespace HideAndSeek.Core
 
         // Game time tracking
         private float currentGameTime;
-        public float CurrentGameTime => currentGameTime;
         // public float RemainingTime => Mathf.Max(0, gameTime - currentGameTime);
 
         // Player references
@@ -100,7 +100,7 @@ namespace HideAndSeek.Core
         private void Initialize()
         {
             currentState = GameState.Menu;
-            currentGameTime = 0f;
+            UpdateGameTime(0);
             updateKillScore(0);
         }
 
@@ -113,14 +113,17 @@ namespace HideAndSeek.Core
         {
             if (currentState == GameState.Playing)
             {
-                UpdateGameTime();
+                UpdateGameTime(currentGameTime += Time.deltaTime);
                 CheckWinConditions();
             }
         }
 
-        private void UpdateGameTime()
+        private void UpdateGameTime(float time)
         {
             currentGameTime += Time.deltaTime;
+            int minutes = (int)(time / 60);
+            int seconds = (int)(time % 60);
+            gameTimeText.text =$"{minutes:D2}:{seconds:D2}";
         }
 
         private void CheckWinConditions()
@@ -144,7 +147,7 @@ namespace HideAndSeek.Core
 
 
             currentState = GameState.Playing;
-            currentGameTime = 0f;
+            UpdateGameTime(0);
             updateKillScore(0);
             comboTime = 0;
             comboBar.fillAmount = 0;
@@ -178,7 +181,7 @@ namespace HideAndSeek.Core
         public void RestartGame()
         {
             currentState = GameState.Menu;
-            currentGameTime = 0f;
+            UpdateGameTime(0);
             updateKillScore(0);
             
             Debug.Log("Game Restarted!");
