@@ -41,7 +41,6 @@ namespace HideAndSeek.Core
                     {
                         GameObject go = new GameObject("GameManager");
                         _instance = go.AddComponent<GameManager>();
-                        DontDestroyOnLoad(go);
                     }
                 }
                 return _instance;
@@ -51,7 +50,7 @@ namespace HideAndSeek.Core
         // Game State Enum
         public enum GameState 
         { 
-            Menu, 
+            WaitGameStart, 
             Playing, 
             GameOver 
         }
@@ -64,7 +63,7 @@ namespace HideAndSeek.Core
         }
 
         // Current game state
-        [SerializeField] private GameState currentState = GameState.Menu;
+        [SerializeField] private GameState currentState = GameState.WaitGameStart;
         public GameState CurrentState => currentState;
 
         // Game time tracking
@@ -88,7 +87,6 @@ namespace HideAndSeek.Core
             if (_instance == null)
             {
                 _instance = this;
-                DontDestroyOnLoad(gameObject);
             }
             else if (_instance != this)
             {
@@ -96,12 +94,12 @@ namespace HideAndSeek.Core
                 return;
             }
             
-            ShowMeneu();
+            WaitGameBegin();
         }
 
-        public void ShowMeneu()
+        public void WaitGameBegin()
         {
-            currentState = GameState.Menu;
+            currentState = GameState.WaitGameStart;
             //TODO: show menu
         }
 
@@ -132,7 +130,7 @@ namespace HideAndSeek.Core
 
         public void StartGame()
         {
-            if (currentState != GameState.Menu) return;
+            if (currentState != GameState.WaitGameStart) return;
 
             // ¥Í¦¨¨¤¦â
             SpawnManager.Instance.OnSpawnComplete.AddListener(OnSpawnNPCFinish);
@@ -174,7 +172,7 @@ namespace HideAndSeek.Core
 
         public void RestartGame()
         {
-            currentState = GameState.Menu;
+            currentState = GameState.WaitGameStart;
             UpdateGameTime(0);
             updateKillScore(0);
             

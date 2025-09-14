@@ -39,7 +39,6 @@ public class MeshMaterialManager : MonoBehaviour
                 {
                     GameObject go = new GameObject("MeshMaterialManager");
                     _instance = go.AddComponent<MeshMaterialManager>();
-                    DontDestroyOnLoad(go);
                 }
             }
             return _instance;
@@ -51,7 +50,6 @@ public class MeshMaterialManager : MonoBehaviour
         if (_instance == null)
         {
             _instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else if (_instance != this)
         {

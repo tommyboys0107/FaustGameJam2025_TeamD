@@ -51,7 +51,6 @@ namespace HideAndSeek.Core
                     {
                         GameObject go = new GameObject("SpawnManager");
                         _instance = go.AddComponent<SpawnManager>();
-                        DontDestroyOnLoad(go);
                     }
                 }
                 return _instance;
@@ -72,7 +71,6 @@ namespace HideAndSeek.Core
             if (_instance == null)
             {
                 _instance = this;
-                DontDestroyOnLoad(gameObject);
                 InitializePool();
             }
             else if (_instance != this)
@@ -416,15 +414,6 @@ namespace HideAndSeek.Core
                 total += zone.spawnRatio;
             }
             return total;
-        }
-
-        private void OnDestroy()
-        {
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.OnGameStart.RemoveListener(SpawnNPCs);
-                GameManager.Instance.OnGameEnd.RemoveListener(DespawnAllNPCs);
-            }
         }
     }
 }
