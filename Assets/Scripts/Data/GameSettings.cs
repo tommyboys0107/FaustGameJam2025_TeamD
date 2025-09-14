@@ -40,6 +40,8 @@ namespace HideAndSeek.Data
         [Tooltip("Time window for combo in seconds")]
         public float comboTimeWindow = 3f;
 
+        public float failedArrestPenalty = 5f;
+
         [Header("Audio Settings")]
         [Tooltip("Master volume level")]
         [Range(0f, 1f)]

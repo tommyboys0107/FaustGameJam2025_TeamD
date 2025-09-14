@@ -97,6 +97,7 @@ namespace HideAndSeek.Player
             else
             {
                 StartCoroutine(PerformArrestCoroutine(null));
+                GameManager.Instance.FailArrest();
                 Debug.Log("Killer not in range for arrest");
             }
         }

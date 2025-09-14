@@ -119,8 +119,8 @@ namespace HideAndSeek.Core
 
         private void UpdateGameTime(float time)
         {
-            currentGameTime += Time.deltaTime;
-            gameTimeText.ShowTime(time);;
+            currentGameTime = time;
+            gameTimeText.ShowTime(time);
         }
 
         private void updateKillScore(int core)
@@ -220,7 +220,6 @@ namespace HideAndSeek.Core
             {
                 yield return null;
                 t += Time.deltaTime;
-                Vector3.Lerp(Vector3.one, enlargeSize, t / showTime);
                 killScoreText.transform.localScale = Vector3.Lerp(Vector3.one, enlargeSize, t / showTime);
             } while (t < showTime);
             t = 0;
@@ -230,6 +229,20 @@ namespace HideAndSeek.Core
                 t += Time.deltaTime;
                 killScoreText.transform.localScale = Vector3.Lerp(enlargeSize, Vector3.one, t / showTime);
             } while (t < showTime);
+        }
+
+        public void FailArrest()
+        {
+            UpdateGameTime(currentGameTime + gameSettings.failedArrestPenalty);
+            StartCoroutine(failArrestShowing());
+        }
+
+        private IEnumerator failArrestShowing()
+        {
+            var orgColor = gameTimeText.color;
+            gameTimeText.color = Color.red;
+            yield return new WaitForSeconds(.2f);
+            gameTimeText.color = orgColor;
         }
 
         public GameObject GetPlayerByRole(PlayerRole role)
