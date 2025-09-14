@@ -85,8 +85,8 @@ namespace HideAndSeek.Core
 
         [Header("DEBUG")]
         [SerializeField] private KeyCode DebugKey = KeyCode.G;
-        [SerializeField] private int KillerChildNumber = 2;
-        [SerializeField] private int PoliceChildNumber = 3;
+        [SerializeField] private int KillerChildNumber = 0;
+        [SerializeField] private int PoliceChildNumber = 1;
         private bool debugMode = false;
 
         private void Awake()
@@ -126,8 +126,9 @@ namespace HideAndSeek.Core
                 if(Input.GetKeyDown(DebugKey))
                 {
                     debugMode = !debugMode;
-                    killerPlayer.transform.GetChild(KillerChildNumber).gameObject.SetActive(debugMode);
-                    killerPlayer.transform.GetChild(PoliceChildNumber).gameObject.SetActive(debugMode); 
+                    killerPlayer.transform.GetChild(0).GetChild(KillerChildNumber).gameObject.SetActive(debugMode);
+                    policePlayer.transform.GetChild(0).GetChild(PoliceChildNumber).gameObject.SetActive(debugMode); 
+                
                 }
             }
         }

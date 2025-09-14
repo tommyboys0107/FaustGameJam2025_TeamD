@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.078431375, g: 0.078431375, b: 0.078431375, a: 1}
+  m_AmbientSkyColor: {r: 0.17520213, g: 0.17520213, b: 0.17520213, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -1029,6 +1029,9 @@ MonoBehaviour:
   gameTimeText: {fileID: 369718390}
   gameEndUI: {fileID: 999069356}
   currentState: 0
+  DebugKey: 103
+  KillerChildNumber: 1
+  PoliceChildNumber: 0
 --- !u!4 &1774794848
 Transform:
   m_ObjectHideFlags: 0
