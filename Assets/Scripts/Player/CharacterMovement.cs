@@ -1,5 +1,6 @@
 using HideAndSeek.Data;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace HideAndSeek.Player
 {
@@ -12,8 +13,8 @@ namespace HideAndSeek.Player
         [Header("Movement Settings")]
         [SerializeField] private float moveSpeed = 5f;
         [SerializeField] private float rotationSpeed = 720f;
-        [SerializeField] private float acceleration = 10f;
-        [SerializeField] private float deceleration = 10f;
+        [SerializeField] private float acceleration = 3f;
+        [SerializeField] private float deceleration = 3f;
 
         // Components
         private CharacterController characterController;
@@ -69,13 +70,7 @@ namespace HideAndSeek.Player
 
         private void UpdateMovement()
         {
-            var playerController = GetComponent<PlayerController>();
-            if (playerController == null)
-            {
-                // Smoothly interpolate velocity
-                currentVelocity = Vector3.MoveTowards(currentVelocity, targetVelocity,
-                    (targetVelocity.magnitude > currentVelocity.magnitude ? acceleration : deceleration) * Time.deltaTime);
-            }
+            currentVelocity = targetVelocity;
 
             // Apply gravity if not grounded
             if (characterController.isGrounded)
@@ -91,7 +86,11 @@ namespace HideAndSeek.Player
             if (characterController.enabled)
             {
                 characterController.Move(currentVelocity * Time.deltaTime);
-
+                // Handle rotation
+                if (targetVelocity.magnitude > 0.1f)
+                {
+                    RotateTowardsDirection(targetVelocity);
+                }
             }
         }
 

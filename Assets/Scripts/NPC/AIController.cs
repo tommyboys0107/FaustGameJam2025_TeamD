@@ -123,12 +123,8 @@ namespace HideAndSeek.NPC
             if (characterMovement == null) return;
 
             // Read movement input based on player keys
-            float horizontal = 0f;
-            float vertical = 0f;
-
-            horizontal = Random.Range(-1, 2);
-            vertical = Random.Range(-1, 2);
-
+            float horizontal = Random.Range(-1, 2);
+            float vertical = Random.Range(-1, 2);
             movementInput = new Vector2(horizontal, vertical);
 
             // Normalize diagonal movement
