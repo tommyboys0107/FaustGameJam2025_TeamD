@@ -126,8 +126,8 @@ namespace HideAndSeek.Core
                 if(Input.GetKeyDown(DebugKey))
                 {
                     debugMode = !debugMode;
-                    killerPlayer.transform.GetChild(0).GetChild(KillerChildNumber).gameObject.SetActive(debugMode);
-                    policePlayer.transform.GetChild(0).GetChild(PoliceChildNumber).gameObject.SetActive(debugMode); 
+                    killerPlayer.transform.GetChild(-1).GetChild(KillerChildNumber).gameObject.SetActive(debugMode);
+                    policePlayer.transform.GetChild(-1).GetChild(PoliceChildNumber).gameObject.SetActive(debugMode); 
                 
                 }
             }
