@@ -75,7 +75,9 @@ namespace HideAndSeek.Core
             }
             else if (_instance != this)
             {
-                Destroy(gameObject);
+                Destroy(_instance);
+                _instance = this;
+                InitializePool();
                 return;
             }
         }
@@ -414,6 +416,13 @@ namespace HideAndSeek.Core
                 total += zone.spawnRatio;
             }
             return total;
+        }
+        private void OnDestroy()
+        {
+            if (_instance == this)
+            {
+                _instance = null;
+            }
         }
     }
 }

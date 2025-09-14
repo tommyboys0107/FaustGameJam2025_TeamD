@@ -53,7 +53,8 @@ public class MeshMaterialManager : MonoBehaviour
         }
         else if (_instance != this)
         {
-            Destroy(gameObject);
+            Destroy(_instance);
+            _instance = this;
         }
     }
 
@@ -74,5 +75,12 @@ public class MeshMaterialManager : MonoBehaviour
         //renderer.transform.localScale = data.scale;
 
         return true;
+    }
+    private void OnDestroy()
+    {
+        if (_instance == this)
+        {
+            _instance = null;
+        }
     }
 }

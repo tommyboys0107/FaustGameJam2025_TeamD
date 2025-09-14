@@ -90,7 +90,8 @@ namespace HideAndSeek.Core
             }
             else if (_instance != this)
             {
-                Destroy(gameObject);
+                Destroy(_instance);
+                _instance = this;
                 return;
             }
             
@@ -258,6 +259,14 @@ namespace HideAndSeek.Core
                 comboBar.fillAmount = comboTime / gameSettings.comboTimeWindow;
             } while (comboTime > 0);
             comboBar.fillAmount = 0f;
+        }
+
+        private void OnDestroy()
+        {
+            if (_instance == this)
+            {
+                _instance = null;
+            }
         }
     }
 }
