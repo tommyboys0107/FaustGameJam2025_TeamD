@@ -249,7 +249,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   killCountText: {fileID: 5753622322916452233}
   scoreText: {fileID: 3634707787032345366}
-  timeText: {fileID: 106251146133916919}
+  timeText: {fileID: 2757990003065622486}
 --- !u!1 &2947585025506881246
 GameObject:
   m_ObjectHideFlags: 0
