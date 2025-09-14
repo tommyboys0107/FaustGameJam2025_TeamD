@@ -80,6 +80,7 @@ namespace HideAndSeek.Core
 
         private float comboTime;
         private Coroutine comboCoolDown;
+        private int comboCount = 0;
 
         private void Awake()
         {
@@ -196,16 +197,18 @@ namespace HideAndSeek.Core
         {
             if (currentState != GameState.Playing) return;
             killCount++;
+            comboCount++;
             var score = killScore;
             if(comboTime > 0)
             {
                 score +=(int)(gameSettings.killBaseScore * gameSettings.comboMultiplier);
+                comboTime = gameSettings.comboTimeWindow;
             }
             else
             {
                 score += gameSettings.killBaseScore;
+                comboCoolDown = StartCoroutine(_comboCoolDown());
             }
-            comboCoolDown = StartCoroutine(_comboCoolDown());
             updateKillScore(score);
             StartCoroutine(popKillScoreText());
         }
@@ -295,6 +298,7 @@ namespace HideAndSeek.Core
                 comboBar.fillAmount = comboTime / gameSettings.comboTimeWindow;
             } while (comboTime > 0);
             comboBar.fillAmount = 0f;
+            comboCount = 0;
         }
 
         private void OnDestroy()
