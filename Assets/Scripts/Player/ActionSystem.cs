@@ -8,12 +8,7 @@ namespace HideAndSeek.Player
     /// Manages animations and action execution
     /// </summary>
     public class ActionSystem : MonoBehaviour
-    {
-        [Header("Action Settings")]
-        [SerializeField] private AnimationClip[] danceAnimations;
-        [SerializeField] private AnimationClip killAnimation;
-        [SerializeField] private AnimationClip arrestAnimation;
-        
+    {   
         [Header("Action Detection")]
         [SerializeField] private float interactionRange = 2f;
         [SerializeField] private LayerMask npcLayer = 1;
@@ -117,6 +112,7 @@ namespace HideAndSeek.Player
             }
             else
             {
+                StartCoroutine(PerformArrestCoroutine(null));
                 Debug.Log("Killer not in range for arrest");
             }
         }
@@ -131,6 +127,7 @@ namespace HideAndSeek.Player
             {
                 string danceTrigger = $"Dance{Mathf.Clamp(danceType, 0, 3)}";
                 animator.SetTrigger(danceTrigger);
+                Debug.Log($"[Dance] Type is {danceTrigger}");
             }
             
             // Play dance sound
@@ -199,15 +196,20 @@ namespace HideAndSeek.Player
         {
             isPerformingAction = true;
             lastActionTime = Time.time;
-            
+
             // Face the target
-            Vector3 directionToTarget = (target.transform.position - transform.position).normalized;
-            directionToTarget.y = 0;
-            if (directionToTarget != Vector3.zero)
+            if (target != null)
             {
-                transform.rotation = Quaternion.LookRotation(directionToTarget);
+                Vector3 directionToTarget = (target.transform.position - transform.position).normalized;
+                directionToTarget.y = 0;
+                if (directionToTarget != Vector3.zero)
+                {
+                    transform.rotation = Quaternion.LookRotation(directionToTarget);
+                }
             }
-            
+
+            ExecuteArrest(gameObject);
+
             // Play arrest animation
             if (animator != null)
             {
@@ -221,20 +223,24 @@ namespace HideAndSeek.Player
             }
             
             // Wait for animation timing
-            yield return new WaitForSeconds(1.5f);
-            
-            // Execute arrest
-            ExecuteArrest(target);
-            
-            // Invoke event
-            OnArrestPerformed?.Invoke(target);
-            
-            Debug.Log($"Player arrested: {target.name}");
-            
-            // Police wins by arresting killer
-            GameManager.Instance.EndGame(GameManager.PlayerRole.Police);
-            
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.7f);
+
+
+            if (target != null)
+            {
+                // Execute arrest
+                ExecuteArrest(target);
+
+                // Invoke event
+                OnArrestPerformed?.Invoke(target);
+
+                Debug.Log($"Player arrested: {target.name}");
+
+                // Police wins by arresting killer
+                GameManager.Instance.EndGame(GameManager.PlayerRole.Police);
+
+                yield return new WaitForSeconds(0.5f);
+            }
             
             isPerformingAction = false;
         }

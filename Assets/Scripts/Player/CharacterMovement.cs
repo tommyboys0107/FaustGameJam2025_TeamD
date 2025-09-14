@@ -22,10 +22,11 @@ namespace HideAndSeek.Player
         // Movement state
         private Vector3 currentVelocity;
         private Vector3 targetVelocity;
+        private bool isMoving;
 
         // Properties
         public Vector3 Velocity => currentVelocity;
-        public bool IsMoving => currentVelocity.magnitude > 0.1f;
+        public bool IsMoving { get { return isMoving; } set { isMoving = value; } }
         public float Speed => currentVelocity.magnitude;
 
         private void Awake()
@@ -68,9 +69,13 @@ namespace HideAndSeek.Player
 
         private void UpdateMovement()
         {
-            // Smoothly interpolate velocity
-            currentVelocity = Vector3.MoveTowards(currentVelocity, targetVelocity,
-                (targetVelocity.magnitude > currentVelocity.magnitude ? acceleration : deceleration) * Time.deltaTime);
+            var playerController = GetComponent<PlayerController>();
+            if (playerController == null)
+            {
+                // Smoothly interpolate velocity
+                currentVelocity = Vector3.MoveTowards(currentVelocity, targetVelocity,
+                    (targetVelocity.magnitude > currentVelocity.magnitude ? acceleration : deceleration) * Time.deltaTime);
+            }
 
             // Apply gravity if not grounded
             if (characterController.isGrounded)
@@ -98,7 +103,7 @@ namespace HideAndSeek.Player
             animator.SetFloat("Speed", Speed);
             animator.SetFloat("VelocityX", currentVelocity.x);
             animator.SetFloat("VelocityZ", currentVelocity.z);
-            animator.SetBool("IsMoving", IsMoving);
+            animator.SetBool("IsMoving", isMoving);
         }
 
         /// <summary>

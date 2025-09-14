@@ -107,10 +107,10 @@ namespace HideAndSeek.Player
             float horizontal = 0f;
             float vertical = 0f;
 
-            if (Input.GetKey(currentKeys.left)) horizontal -= 1f;
-            if (Input.GetKey(currentKeys.right)) horizontal += 1f;
-            if (Input.GetKey(currentKeys.down)) vertical -= 1f;
-            if (Input.GetKey(currentKeys.up)) vertical += 1f;
+            if (Input.GetKey(currentKeys.left)) horizontal = -1f;
+            if (Input.GetKey(currentKeys.right)) horizontal = 1f;
+            if (Input.GetKey(currentKeys.down)) vertical = -1f;
+            if (Input.GetKey(currentKeys.up)) vertical = 1f;
 
             movementInput = new Vector2(horizontal, vertical);
 
@@ -121,8 +121,16 @@ namespace HideAndSeek.Player
             // Convert to 3D movement direction
             Vector3 moveDirection = new Vector3(movementInput.x, 0, movementInput.y);
 
-            // Apply movement to character
-            characterMovement.SetMovementInput(moveDirection);
+            // Instant stop on input release
+            if (horizontal == 0 && vertical == 0)
+            {
+                moveDirection = Vector3.zero; // Or maintain vertical velocity for gravity
+                characterMovement.IsMoving = false;
+            }
+            else
+            {
+                characterMovement.IsMoving = true;
+            }
 
             // Handle rotation
             if (moveDirection.magnitude > 0.1f)
@@ -135,6 +143,9 @@ namespace HideAndSeek.Player
             {
                 playerController.SetMovementInput(movementInput);
             }
+
+            // Apply movement to character
+            characterMovement.SetMovementInput(moveDirection);
         }
 
         private void HandleActionInput()

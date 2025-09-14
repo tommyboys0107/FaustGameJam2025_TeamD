@@ -85,7 +85,8 @@ namespace HideAndSeek.Player
         
         // Public action methods for traditional input
         public void TriggerInteract() 
-        { 
+        {
+            Debug.Log($"[Interact] {CanInteract}, Remain={InteractionCooldownRemaining}, currentState={currentState}");
             if (CanInteract && currentState != PlayerState.Stunned)
                 PerformInteraction();
         }
@@ -304,8 +305,7 @@ namespace HideAndSeek.Player
         
         private void ReturnToIdle()
         {
-            if (currentState != PlayerState.Stunned)
-                CurrentState = PlayerState.Idle;
+            CurrentState = PlayerState.Idle;
         }
         
         // Public methods for external control

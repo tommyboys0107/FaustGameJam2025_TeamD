@@ -17,9 +17,9 @@ namespace HideAndSeek.NPC
 
         [Header("State Settings")]
         [Range(0, 1)]
-        [SerializeField] private float dancingProb = 0.7f;
-        [SerializeField] private float stateUpdatedMinTime = 3f;
-        [SerializeField] private float stateUpdatedMaxTime = 10f;
+        [SerializeField] private float dancingProb = 0f;
+        [SerializeField] private float stateUpdatedMinTime = 1f;
+        [SerializeField] private float stateUpdatedMaxTime = 5f;
         private float nextTime;
         private NPCState nowState = NPCState.Idle;
 
@@ -29,6 +29,8 @@ namespace HideAndSeek.NPC
 
         // Movement 
         private Vector2 movementInput;
+        private bool isPerformAction = false;
+
 
         private void Awake()
         {
@@ -67,7 +69,7 @@ namespace HideAndSeek.NPC
 
         private void UpdateState()
         {
-            nextTime -= Time.time;
+            nextTime -= Time.deltaTime;
             if (nextTime <= 0)
             {
                 nowState = RandomState();
@@ -91,7 +93,7 @@ namespace HideAndSeek.NPC
         private NPCState RandomState()
         {
             NPCState state = NPCState.Idle;
-            int max = (int)(dancingProb * 10) + 2;
+            int max = (int)(dancingProb * 10) + 3;
             int rnd = Random.Range(0, max);
             if (rnd == 0) state = NPCState.Idle;
             else if (rnd == 1) state = NPCState.Move;
@@ -136,14 +138,27 @@ namespace HideAndSeek.NPC
             // Convert to 3D movement direction
             Vector3 moveDirection = new Vector3(movementInput.x, 0, movementInput.y);
 
-            // Apply movement to character
-            characterMovement.SetMovementInput(moveDirection);
+            // Instant stop on input release
+            if (horizontal == 0 && vertical == 0)
+            {
+                moveDirection = Vector3.zero; // Or maintain vertical velocity for gravity
+                characterMovement.IsMoving = false;
+            }
+            else
+            {
+                characterMovement.IsMoving = true;
+            }
+            actionSystem.CancelAction();
 
             // Handle rotation
             if (moveDirection.magnitude > 0.1f)
             {
                 characterMovement.RotateTowardsDirection(moveDirection);
             }
+
+            // Apply movement to character
+            characterMovement.SetMovementInput(moveDirection);
+            Debug.Log(moveDirection);
         }
     }
 }

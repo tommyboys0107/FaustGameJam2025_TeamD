@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 78cea97c92e5e448ca046a1b4ddaa047, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -81,9 +85,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 78cea97c92e5e448ca046a1b4ddaa047, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6975818316434616007}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 78cea97c92e5e448ca046a1b4ddaa047, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 5844622625683270731, guid: 78cea97c92e5e448ca046a1b4ddaa047, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4263772448528358490}
+      addedObject: {fileID: 574271989108530481}
   m_SourcePrefab: {fileID: 100100000, guid: 78cea97c92e5e448ca046a1b4ddaa047, type: 3}
 --- !u!1 &1896028595090918233 stripped
 GameObject:
@@ -127,16 +131,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8ec29bdd463a9d49aa197f346c328a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  danceAnimations: []
-  killAnimation: {fileID: 0}
-  arrestAnimation: {fileID: 0}
   interactionRange: 2
   npcLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 64
   playerLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 64
   audioSource: {fileID: 0}
   killSound: {fileID: 0}
   arrestSound: {fileID: 0}
@@ -157,17 +158,22 @@ MonoBehaviour:
   rotationSpeed: 720
   acceleration: 10
   deceleration: 10
---- !u!95 &4263772448528358490
+--- !u!1 &5155820476314049091 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5844622625683270731, guid: 78cea97c92e5e448ca046a1b4ddaa047, type: 3}
+  m_PrefabInstance: {fileID: 1626188863496893960}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &574271989108530481
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1896028595090918233}
+  m_GameObject: {fileID: 5155820476314049091}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c5ce2adc5ccba1648a78e1a3bf79d538, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
