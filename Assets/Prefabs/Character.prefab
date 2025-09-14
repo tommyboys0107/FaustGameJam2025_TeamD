@@ -182,7 +182,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Police\n\u25BC"
+  m_Text: "\u25BC"
 --- !u!114 &6392223467963362386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,7 +277,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Killer\n\u25BC"
+  m_Text: "\u25BC"
 --- !u!114 &8736611252387248288
 MonoBehaviour:
   m_ObjectHideFlags: 0
