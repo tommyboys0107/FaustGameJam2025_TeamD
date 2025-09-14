@@ -208,6 +208,28 @@ namespace HideAndSeek.Core
                 comboCoolDown = StartCoroutine(_comboCoolDown());
             }
             updateKillScore(score);
+            StartCoroutine(popKillScoreText());
+        }
+
+        private IEnumerator popKillScoreText()
+        {
+            Vector3 enlargeSize = new(1.2f, 1.2f, 1);
+            float showTime = .2f;
+            float t = 0;
+            do
+            {
+                yield return null;
+                t += Time.deltaTime;
+                Vector3.Lerp(Vector3.one, enlargeSize, t / showTime);
+                killScoreText.transform.localScale = Vector3.Lerp(Vector3.one, enlargeSize, t / showTime);
+            } while (t < showTime);
+            t = 0;
+            do
+            {
+                yield return null;
+                t += Time.deltaTime;
+                killScoreText.transform.localScale = Vector3.Lerp(enlargeSize, Vector3.one, t / showTime);
+            } while (t < showTime);
         }
 
         public GameObject GetPlayerByRole(PlayerRole role)
