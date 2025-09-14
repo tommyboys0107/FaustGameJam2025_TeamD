@@ -14,7 +14,7 @@ on:
           - Release
 
 env:
-  PROJECT_NAME: 'Hide & Seek'
+  PROJECT_NAME: 'Vibing Rush'
   SYMBOL_CONFIG: ${{ inputs.symbolConfig || 'Debug' }}
 
 jobs:
