@@ -10,12 +10,6 @@ namespace HideAndSeek.NPC
     {
         private enum NPCState { Idle, Move, Dance };
 
-        [Header("Movement Settings")]
-        [SerializeField] private float moveSpeed = 5f;
-        [SerializeField] private float rotationSpeed = 720f;
-        [SerializeField] private float acceleration = 10f;
-        [SerializeField] private float deceleration = 10f;
-
         [Header("State Settings")]
         [Range(0, 1)]
         [SerializeField] private float dancingProb = 0f;
@@ -30,7 +24,6 @@ namespace HideAndSeek.NPC
 
         // Movement 
         private Vector2 movementInput;
-        private bool isPerformAction = false;
 
 
         private void Awake()
@@ -40,23 +33,12 @@ namespace HideAndSeek.NPC
 
         private void Start()
         {
-            LoadSettingsFromGameManager();
             nextTime = Random.Range(stateUpdatedMinTime, stateUpdatedMaxTime);
         }
 
         private void Update()
         {
             UpdateState();
-        }
-
-        private void LoadSettingsFromGameManager()
-        {
-            var gameSettings = Core.GameManager.Instance?.GetGameSettings();
-            if (gameSettings != null)
-            {
-                moveSpeed = gameSettings.playerMoveSpeed;
-                rotationSpeed = gameSettings.playerRotationSpeed;
-            }
         }
 
         private void InitializeComponents()

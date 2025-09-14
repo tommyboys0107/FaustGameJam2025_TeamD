@@ -205,15 +205,15 @@ namespace HideAndSeek.Player
             }
             
             // Apply movement
-            velocity = moveDirection * moveSpeed;
+            //velocity = moveDirection * moveSpeed;
             
-            // Apply gravity
-            if (!isGrounded)
-                velocity.y -= 9.81f * Time.deltaTime;
-            else
-                velocity.y = 0;
+            //// Apply gravity
+            //if (!isGrounded)
+            //    velocity.y -= 9.81f * Time.deltaTime;
+            //else
+            //    velocity.y = 0;
                 
-            characterController.Move(velocity * Time.deltaTime);
+            //characterController.Move(velocity * Time.deltaTime);
         }
         
         private void UpdateAnimations()
