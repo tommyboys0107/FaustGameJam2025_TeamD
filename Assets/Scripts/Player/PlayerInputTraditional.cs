@@ -67,9 +67,9 @@ namespace HideAndSeek.Player
                         down = KeyCode.S,
                         left = KeyCode.A,
                         right = KeyCode.D,
-                        interact = KeyCode.Space,
+                        interact = KeyCode.Tab,
                         disguise = KeyCode.LeftShift,
-                        dance = KeyCode.Tab
+                        dance = KeyCode.LeftControl
                     };
                     break;
 
