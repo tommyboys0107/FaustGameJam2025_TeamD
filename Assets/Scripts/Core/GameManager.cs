@@ -144,6 +144,7 @@ namespace HideAndSeek.Core
             updateKillScore(0);
             comboTime = 0;
             comboBar.fillAmount = 0;
+            AudioEffectManaager.Instance.PlayGameStartEffect();
 
             OnGameStart?.Invoke();
             Debug.Log("Game Started!");
