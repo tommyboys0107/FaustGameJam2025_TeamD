@@ -25,10 +25,7 @@ namespace HideAndSeek.Data
         [Header("NPC Settings")]
         [Tooltip("Number of NPCs to spawn")]
         public int npcCount = 30;
-        
-        [Tooltip("NPC movement speed")]
-        public float npcMoveSpeed = 2f;
-        
+                
         [Tooltip("Probability of NPC dancing (0-1)")]
         [Range(0f, 1f)]
         public float npcDanceFrequency = 0.7f;
@@ -72,7 +69,6 @@ namespace HideAndSeek.Data
             policeCooldown = Mathf.Max(0.1f, policeCooldown);
             disguiseCooldown = Mathf.Max(0.1f, disguiseCooldown);
             playerMoveSpeed = Mathf.Max(0.1f, playerMoveSpeed);
-            npcMoveSpeed = Mathf.Max(0.1f, npcMoveSpeed);
             npcCount = Mathf.Max(1, npcCount);
             killBaseScore = Mathf.Max(1, killBaseScore);
             

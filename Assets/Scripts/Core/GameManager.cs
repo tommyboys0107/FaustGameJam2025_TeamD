@@ -90,7 +90,8 @@ namespace HideAndSeek.Core
             }
             else if (_instance != this)
             {
-                Destroy(gameObject);
+                Destroy(_instance);
+                _instance = this;
                 return;
             }
             
@@ -207,6 +208,28 @@ namespace HideAndSeek.Core
                 comboCoolDown = StartCoroutine(_comboCoolDown());
             }
             updateKillScore(score);
+            StartCoroutine(popKillScoreText());
+        }
+
+        private IEnumerator popKillScoreText()
+        {
+            Vector3 enlargeSize = new(1.2f, 1.2f, 1);
+            float showTime = .2f;
+            float t = 0;
+            do
+            {
+                yield return null;
+                t += Time.deltaTime;
+                Vector3.Lerp(Vector3.one, enlargeSize, t / showTime);
+                killScoreText.transform.localScale = Vector3.Lerp(Vector3.one, enlargeSize, t / showTime);
+            } while (t < showTime);
+            t = 0;
+            do
+            {
+                yield return null;
+                t += Time.deltaTime;
+                killScoreText.transform.localScale = Vector3.Lerp(enlargeSize, Vector3.one, t / showTime);
+            } while (t < showTime);
         }
 
         public GameObject GetPlayerByRole(PlayerRole role)
@@ -260,6 +283,14 @@ namespace HideAndSeek.Core
                 comboBar.fillAmount = comboTime / gameSettings.comboTimeWindow;
             } while (comboTime > 0);
             comboBar.fillAmount = 0f;
+        }
+
+        private void OnDestroy()
+        {
+            if (_instance == this)
+            {
+                _instance = null;
+            }
         }
     }
 }

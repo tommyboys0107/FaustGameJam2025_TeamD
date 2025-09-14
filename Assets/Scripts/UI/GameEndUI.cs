@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameEndUI : MonoBehaviour
@@ -13,5 +14,15 @@ public class GameEndUI : MonoBehaviour
         scoreText.text = $"Score: {score}";
         timeText.ShowTime(time);
         gameObject.SetActive(true);
+    }
+
+    public void OnRestartClick()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void OnMenuClick()
+    {
+        SceneManager.LoadScene(0);
     }
 }
