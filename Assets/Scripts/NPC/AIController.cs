@@ -158,7 +158,6 @@ namespace HideAndSeek.NPC
 
             // Apply movement to character
             characterMovement.SetMovementInput(moveDirection);
-            Debug.Log(moveDirection);
         }
     }
 }

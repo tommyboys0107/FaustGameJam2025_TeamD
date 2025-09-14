@@ -85,35 +85,41 @@ namespace HideAndSeek.Player
             lastDisguiseTime = Time.time;
             
             // Choose a random disguise
-            int newDisguiseIndex;
-            do
-            {
-                newDisguiseIndex = Random.Range(0, Mathf.Max(availableMaterials.Length, availableColors.Length));
-            } while (newDisguiseIndex == currentDisguiseIndex && (availableMaterials.Length > 1 || availableColors.Length > 1));
+            //int newDisguiseIndex;
+            //do
+            //{
+            //    newDisguiseIndex = Random.Range(0, Mathf.Max(availableMaterials.Length, availableColors.Length));
+            //} while (newDisguiseIndex == currentDisguiseIndex && (availableMaterials.Length > 1 || availableColors.Length > 1));
             
-            currentDisguiseIndex = newDisguiseIndex;
+            //currentDisguiseIndex = newDisguiseIndex;
             
-            // Apply material change
-            if (availableMaterials.Length > 0 && characterRenderer != null)
-            {
-                Material newMaterial = availableMaterials[newDisguiseIndex % availableMaterials.Length];
-                characterRenderer.material = newMaterial;
-            }
+            //// Apply material change
+            //if (availableMaterials.Length > 0 && characterRenderer != null)
+            //{
+            //    Material newMaterial = availableMaterials[newDisguiseIndex % availableMaterials.Length];
+            //    characterRenderer.material = newMaterial;
+            //}
             
-            // Apply color change
-            if (availableColors.Length > 0 && characterRenderer != null)
-            {
-                Color newColor = availableColors[newDisguiseIndex % availableColors.Length];
-                characterRenderer.material.color = newColor;
-            }
+            //// Apply color change
+            //if (availableColors.Length > 0 && characterRenderer != null)
+            //{
+            //    Color newColor = availableColors[newDisguiseIndex % availableColors.Length];
+            //    characterRenderer.material.color = newColor;
+            //}
             
-            // Apply mesh change
-            if (availableMeshes.Length > 0 && meshFilter != null)
-            {
-                Mesh newMesh = availableMeshes[newDisguiseIndex % availableMeshes.Length];
-                meshFilter.mesh = newMesh;
-            }
-            
+            //// Apply mesh change
+            //if (availableMeshes.Length > 0 && meshFilter != null)
+            //{
+            //    Mesh newMesh = availableMeshes[newDisguiseIndex % availableMeshes.Length];
+            //    meshFilter.mesh = newMesh;
+            //}
+
+            var meshMaterialManager = MeshMaterialManager.Instance;
+            meshMaterialManager.ApplyMeshMaterial(
+                gameObject.GetComponentInChildren<SkinnedMeshRenderer>(),
+                meshMaterialManager.GetRandomMeshMaterial()
+                );
+
             // Reset suspicion after disguise
             isDisguised = true;
             

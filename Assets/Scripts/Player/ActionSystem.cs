@@ -14,12 +14,6 @@ namespace HideAndSeek.Player
         [SerializeField] private LayerMask npcLayer = 1;
         [SerializeField] private LayerMask playerLayer = 1;
         
-        [Header("Audio")]
-        [SerializeField] private AudioSource audioSource;
-        [SerializeField] private AudioClip killSound;
-        [SerializeField] private AudioClip arrestSound;
-        [SerializeField] private AudioClip[] danceSounds;
-        
         // Components
         private Animator animator;
         private PlayerController playerController;
@@ -46,16 +40,6 @@ namespace HideAndSeek.Player
         {
             animator = GetComponentInChildren<Animator>();
             //playerController = GetComponent<PlayerController>();
-            
-            if (audioSource == null)
-                audioSource = GetComponent<AudioSource>();
-                
-            if (audioSource == null)
-            {
-                audioSource = gameObject.AddComponent<AudioSource>();
-                audioSource.playOnAwake = false;
-                audioSource.spatialBlend = 1f; // 3D sound
-            }
         }
 
         public void SetPlayerController()
@@ -130,13 +114,6 @@ namespace HideAndSeek.Player
                 Debug.Log($"[Dance] Type is {danceTrigger}");
             }
             
-            // Play dance sound
-            if (danceSounds.Length > 0 && audioSource != null)
-            {
-                AudioClip danceSound = danceSounds[Random.Range(0, danceSounds.Length)];
-                audioSource.PlayOneShot(danceSound, 0.8f);
-            }
-            
             // Invoke event
             OnDancePerformed?.Invoke(danceType);
             
@@ -160,22 +137,19 @@ namespace HideAndSeek.Player
             {
                 transform.rotation = Quaternion.LookRotation(directionToTarget);
             }
-            
+
             // Play kill animation
             /*if (animator != null)
             {
                 animator.SetTrigger("Kill");
             }*/
-            
+
             // Play kill sound
-            if (killSound != null && audioSource != null)
-            {
-                audioSource.PlayOneShot(killSound, 1f);
-            }
-            
+            AudioEffectManaager.Instance.PlayKillEffect();
+
             // Wait for animation timing
             //yield return new WaitForSeconds(1f);
-            
+
             // Execute kill
             ExecuteKill(target);
             
@@ -215,13 +189,10 @@ namespace HideAndSeek.Player
             {
                 animator.SetTrigger("Arrest");
             }
-            
+
             // Play arrest sound
-            if (arrestSound != null && audioSource != null)
-            {
-                audioSource.PlayOneShot(arrestSound, 1f);
-            }
-            
+            AudioEffectManaager.Instance.PlayAssertEffect();
+
             // Wait for animation timing
             yield return new WaitForSeconds(0.7f);
 
