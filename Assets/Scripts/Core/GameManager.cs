@@ -206,8 +206,8 @@ namespace HideAndSeek.Core
             else
             {
                 score += gameSettings.killBaseScore;
-                comboCoolDown = StartCoroutine(_comboCoolDown());
             }
+            comboCoolDown = StartCoroutine(_comboCoolDown());
             updateKillScore(score);
             StartCoroutine(popKillScoreText());
         }
