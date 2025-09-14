@@ -15,17 +15,14 @@ MonoBehaviour:
   killerCooldown: 2
   policeCooldown: 5
   disguiseCooldown: 5
-  playerMoveSpeed: 5
+  playerMoveSpeed: 2
   playerRotationSpeed: 720
   npcCount: 30
-  npcMoveSpeed: 2
   npcDanceFrequency: 0.7
-  suspicionIncreaseRate: 1
-  suspicionDecreaseRate: 0.5
-  maxSuspicionLevel: 100
   killBaseScore: 100
   comboMultiplier: 1.5
   comboTimeWindow: 3
+  failedArrestPenalty: 5
   masterVolume: 1
   musicVolume: 0.8
   sfxVolume: 1

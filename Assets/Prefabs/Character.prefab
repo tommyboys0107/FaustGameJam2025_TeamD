@@ -138,10 +138,6 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
-  audioSource: {fileID: 0}
-  killSound: {fileID: 0}
-  arrestSound: {fileID: 0}
-  danceSounds: []
 --- !u!114 &6975818316434616007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97544b35e19590b4e8e59bc14b924b6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 1
   rotationSpeed: 720
   acceleration: 10
   deceleration: 10

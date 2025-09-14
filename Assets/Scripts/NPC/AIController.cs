@@ -1,6 +1,7 @@
 using HideAndSeek.Data;
 using HideAndSeek.Player;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using static HideAndSeek.Player.PlayerController;
 
 namespace HideAndSeek.NPC
@@ -72,8 +73,8 @@ namespace HideAndSeek.NPC
             nextTime -= Time.deltaTime;
             if (nextTime <= 0)
             {
+                ResetState();
                 nowState = RandomState();
-                Debug.Log($"{gameObject.name}: {nowState}");
                 switch (nowState)
                 {
                     case NPCState.Idle:
@@ -88,6 +89,14 @@ namespace HideAndSeek.NPC
 
                 nextTime = Random.Range(stateUpdatedMinTime, stateUpdatedMaxTime);
             }
+        }
+
+        private void ResetState()
+        {
+            nowState = NPCState.Idle;
+            characterMovement.SetMovementInput(Vector3.zero);
+            actionSystem.CancelAction();
+            characterMovement.IsMoving = false;
         }
 
         private NPCState RandomState()
@@ -154,6 +163,7 @@ namespace HideAndSeek.NPC
 
             // Apply movement to character
             characterMovement.SetMovementInput(moveDirection);
+            Invoke("ResetState", 1f);
         }
     }
 }
