@@ -80,7 +80,6 @@ namespace HideAndSeek.Core
 
         private float comboTime;
         private Coroutine comboCoolDown;
-        private int comboCount = 0;
 
         private void Awake()
         {
@@ -197,7 +196,6 @@ namespace HideAndSeek.Core
         {
             if (currentState != GameState.Playing) return;
             killCount++;
-            comboCount++;
             var score = killScore;
             if(comboTime > 0)
             {
@@ -298,7 +296,6 @@ namespace HideAndSeek.Core
                 comboBar.fillAmount = comboTime / gameSettings.comboTimeWindow;
             } while (comboTime > 0);
             comboBar.fillAmount = 0f;
-            comboCount = 0;
         }
 
         private void OnDestroy()
