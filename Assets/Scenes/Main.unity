@@ -807,7 +807,7 @@ MonoBehaviour:
   npcPrefab: {fileID: 1896028595090918233, guid: 8c3041cc03be6624c9a4e29be705abd0, type: 3}
   spawnParent: {fileID: 0}
   minSpawnRadius: 1
-  maxSpawnRadius: 10
+  maxSpawnRadius: 8
   minSpawnDistance: 1
   spawnZones: []
   useZoneSpawning: 0
