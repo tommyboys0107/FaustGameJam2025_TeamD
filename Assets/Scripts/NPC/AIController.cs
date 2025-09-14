@@ -119,7 +119,7 @@ namespace HideAndSeek.NPC
             }
 
             // Return to idle after dance completes
-            Invoke(nameof(ReturnToIdle), 3f);
+            Invoke(nameof(ReturnToIdle), Random.RandomRange(3f, 7f));
         }
 
         private void ReturnToIdle()
