@@ -163,7 +163,7 @@ namespace HideAndSeek.NPC
 
             // Apply movement to character
             characterMovement.SetMovementInput(moveDirection);
-            Invoke("ResetState", 1f);
+            Invoke("ResetState", Random.RandomRange(1f, 3f));
         }
     }
 }

@@ -243,7 +243,7 @@ namespace HideAndSeek.Player
         public string GetInputDescription()
         {
             return playerID == 1 ?
-                "P1: WASD移動, Space互動, LeftShift偽裝, Tab舞蹈" :
+                "P1: WASD移動, Tab互動, LeftShift偽裝, LeftCtrl舞蹈" :
                 "P2: 方向鍵移動, Enter互動, RightShift偽裝, RightCtrl舞蹈";
         }
 
