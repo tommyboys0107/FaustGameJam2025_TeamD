@@ -223,8 +223,6 @@ namespace HideAndSeek.Player
             
             // Update animator parameters
             animator.SetFloat("Speed", velocity.magnitude);
-            animator.SetBool("IsGrounded", isGrounded);
-            animator.SetInteger("State", (int)currentState);
         }
         
         // Input System callbacks (to be connected by Input System)
