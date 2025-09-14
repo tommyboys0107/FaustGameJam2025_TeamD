@@ -18,11 +18,13 @@ public class GameEndUI : MonoBehaviour
 
     public void OnRestartClick()
     {
+        AudioEffectManaager.Instance.PlayUIClickEffect();
         SceneManager.LoadScene(1);
     }
 
     public void OnMenuClick()
     {
+        AudioEffectManaager.Instance.PlayUIClickEffect();
         SceneManager.LoadScene(0);
     }
 }
