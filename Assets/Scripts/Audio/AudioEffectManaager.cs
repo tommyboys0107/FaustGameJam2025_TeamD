@@ -26,6 +26,8 @@ public class AudioEffectManaager : MonoBehaviour
                 if (_instance == null)
                 {
                     GameObject go = new GameObject("AudioEffectManaager");
+                    DontDestroyOnLoad(go);
+                    go.AddComponent<AudioSource>();
                     _instance = go.AddComponent<AudioEffectManaager>();
                 }
             }
@@ -38,6 +40,7 @@ public class AudioEffectManaager : MonoBehaviour
         if (_instance == null)
         {
             _instance = this;
+            DontDestroyOnLoad(gameObject);
             InitComponents();
         }
         else if (_instance != this)
