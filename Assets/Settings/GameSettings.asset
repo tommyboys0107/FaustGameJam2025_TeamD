@@ -21,7 +21,7 @@ MonoBehaviour:
   npcDanceFrequency: 0.7
   killBaseScore: 100
   comboMultiplier: 1.5
-  comboTimeWindow: 3
+  comboTimeWindow: 5
   failedArrestPenalty: 5
   masterVolume: 1
   musicVolume: 0.8
