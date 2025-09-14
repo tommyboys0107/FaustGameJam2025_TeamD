@@ -554,10 +554,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4104121092941147757, guid: 77a57711cd6b28f41a5cb823bc12ba52, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4928215026241412492, guid: 77a57711cd6b28f41a5cb823bc12ba52, type: 3}
       propertyPath: m_Name
       value: Environment
@@ -567,7 +563,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77a57711cd6b28f41a5cb823bc12ba52, type: 3}
---- !u!1001 &7987044889650815939
+--- !u!1001 &8897835285466770935
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -630,6 +626,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 1472454871}
   - {fileID: 203844589}
+  - {fileID: 8897835285466770935}
   - {fileID: 2803177486977070854}
   - {fileID: 228603146}
-  - {fileID: 7987044889650815939}
