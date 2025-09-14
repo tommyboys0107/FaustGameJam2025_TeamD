@@ -17,7 +17,7 @@ MonoBehaviour:
   disguiseCooldown: 5
   playerMoveSpeed: 2
   playerRotationSpeed: 720
-  npcCount: 30
+  npcCount: 60
   npcDanceFrequency: 0.7
   killBaseScore: 100
   comboMultiplier: 1.5
