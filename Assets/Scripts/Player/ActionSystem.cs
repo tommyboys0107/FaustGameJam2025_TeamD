@@ -74,10 +74,6 @@ namespace HideAndSeek.Player
                     StartCoroutine(PerformKillCoroutine(target));
                 }
             }
-            else
-            {
-                Debug.Log("No target found for kill action");
-            }
         }
         
         /// <summary>
@@ -98,7 +94,6 @@ namespace HideAndSeek.Player
             {
                 StartCoroutine(PerformArrestCoroutine(null));
                 GameManager.Instance.FailArrest();
-                Debug.Log("Killer not in range for arrest");
             }
         }
         
@@ -112,13 +107,10 @@ namespace HideAndSeek.Player
             {
                 string danceTrigger = $"Dance{Mathf.Clamp(danceType, 0, 3)}";
                 animator.SetTrigger(danceTrigger);
-                Debug.Log($"[Dance] Type is {danceTrigger}");
             }
             
             // Invoke event
             OnDancePerformed?.Invoke(danceType);
-            
-            Debug.Log($"Player dancing: Type {danceType}");
             
             // Wait for dance duration
             yield return new WaitForSeconds(3f);
@@ -156,8 +148,6 @@ namespace HideAndSeek.Player
             
             // Invoke event
             OnKillPerformed?.Invoke(target);
-            
-            Debug.Log($"Player killed: {target.name}");
             
             // Update game manager
             GameManager.Instance.AddKill();
@@ -205,8 +195,6 @@ namespace HideAndSeek.Player
 
                 // Invoke event
                 OnArrestPerformed?.Invoke(target);
-
-                Debug.Log($"Player arrested: {target.name}");
 
                 // Police wins by arresting killer
                 GameManager.Instance.EndGame(GameManager.PlayerRole.Police);

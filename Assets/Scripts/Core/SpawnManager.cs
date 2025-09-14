@@ -113,7 +113,6 @@ namespace HideAndSeek.Core
             {
                 if (!zone.IsValid())
                 {
-                    Debug.LogError($"Invalid spawn zone settings detected: {zone.zoneObject?.name ?? "Null Object"}");
                     return false;
                 }
                 totalRatio += zone.spawnRatio;
@@ -121,7 +120,6 @@ namespace HideAndSeek.Core
 
             if (totalRatio > 1.0f)
             {
-                Debug.LogError($"Total spawn ratio ({totalRatio:F2}) exceeds 1.0. Please adjust zone ratios.");
                 return false;
             }
 
@@ -142,7 +140,6 @@ namespace HideAndSeek.Core
 
             if (!ValidateSpawnZoneSettings())
             {
-                Debug.LogError("Spawn zone validation failed. Aborting spawn.");
                 return;
             }
 
@@ -166,7 +163,6 @@ namespace HideAndSeek.Core
             }
 
             OnSpawnComplete?.Invoke();
-            Debug.Log($"Spawned {spawnedNPCs.Count} NPCs");
         }
 
         private void SpawnNPCsInZones()
@@ -186,7 +182,6 @@ namespace HideAndSeek.Core
         {
             if (npcPool.Count == 0)
             {
-                Debug.LogWarning("NPC pool is empty! Consider increasing pool size.");
                 return;
             }
 
@@ -212,7 +207,6 @@ namespace HideAndSeek.Core
         {
             if (npcPool.Count == 0)
             {
-                Debug.LogWarning("NPC pool is empty! Consider increasing pool size.");
                 return;
             }
 
@@ -258,7 +252,6 @@ namespace HideAndSeek.Core
 
                 if (attempts >= maxAttempts)
                 {
-                    Debug.LogWarning($"Could not find non-overlapping spawn position in zone {zone.zoneObject.name}, using current position");
                     break;
                 }
 
@@ -288,7 +281,6 @@ namespace HideAndSeek.Core
 
                 if (attempts >= maxAttempts)
                 {
-                    Debug.LogWarning("Could not find non-overlapping spawn position, using current position");
                     break;
                 }
 

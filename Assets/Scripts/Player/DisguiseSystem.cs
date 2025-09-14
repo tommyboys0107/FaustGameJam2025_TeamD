@@ -78,7 +78,6 @@ namespace HideAndSeek.Player
         {
             if (Time.time < lastDisguiseTime + Core.GameManager.Instance.GetGameSettings()?.disguiseCooldown)
             {
-                Debug.Log("Disguise is on cooldown");
                 return;
             }
             
@@ -131,8 +130,6 @@ namespace HideAndSeek.Player
             
             // Invoke events
             OnDisguiseChanged?.Invoke();
-            
-            Debug.Log($"Disguise changed to index {currentDisguiseIndex}");
         }
 
         private bool ShouldBeDancing()

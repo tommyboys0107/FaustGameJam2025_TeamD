@@ -86,7 +86,6 @@ namespace HideAndSeek.Player
         // Public action methods for traditional input
         public void TriggerInteract() 
         {
-            Debug.Log($"[Interact] {CanInteract}, Remain={InteractionCooldownRemaining}, currentState={currentState}");
             if (CanInteract && currentState != PlayerState.Stunned)
                 PerformInteraction();
         }
@@ -310,7 +309,6 @@ namespace HideAndSeek.Player
         public void SetPlayerRole(GameManager.PlayerRole role)
         {
             PlayerRole = role;
-            Debug.Log($"Player role set to: {role}");
         }
         
         public void SetStunned(bool stunned, float duration = 0f)

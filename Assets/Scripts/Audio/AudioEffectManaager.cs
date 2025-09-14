@@ -56,7 +56,6 @@ public class AudioEffectManaager : MonoBehaviour
         if (audioSource == null)
         {
             audioSource = gameObject.AddComponent<AudioSource>();
-            Debug.LogWarning("AudioSource was missing and has been added automatically.");
         }
     }
 
@@ -64,7 +63,6 @@ public class AudioEffectManaager : MonoBehaviour
     {
         if (killClips.Length == 0)
         {
-            Debug.LogWarning("No audio clips assigned to AudioEffectManager.");
             return;
         }
         int randomIndex = Random.Range(0, killClips.Length);
@@ -75,7 +73,6 @@ public class AudioEffectManaager : MonoBehaviour
     {
         if (AssertClips.Length == 0)
         {
-            Debug.LogWarning("No audio clips assigned to AudioEffectManager.");
             return;
         }
         int randomIndex = Random.Range(0, AssertClips.Length);
@@ -86,7 +83,6 @@ public class AudioEffectManaager : MonoBehaviour
     {
         if (gameStart == null)
         {
-            Debug.LogWarning("No audio clip assigned to AudioEffectManager.");
             return;
         }
         audioSource.PlayOneShot(gameStart);
@@ -96,7 +92,6 @@ public class AudioEffectManaager : MonoBehaviour
     {
         if (SirenShort == null)
         {
-            Debug.LogWarning("No audio clip assigned to AudioEffectManager.");
             return;
         }
         audioSource.PlayOneShot(SirenShort);
@@ -106,7 +101,6 @@ public class AudioEffectManaager : MonoBehaviour
     {
         if (MissionComplete == null)
         {
-            Debug.LogWarning("No audio clip assigned to AudioEffectManager.");
             return;
         }
         audioSource.PlayOneShot(MissionComplete);
@@ -115,7 +109,6 @@ public class AudioEffectManaager : MonoBehaviour
     {
         if (UIClick == null)
         {
-            Debug.LogWarning("No audio clip assigned to AudioEffectManager.");
             return;
         }
         audioSource.PlayOneShot(UIClick);

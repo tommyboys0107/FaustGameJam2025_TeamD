@@ -54,11 +54,6 @@ namespace HideAndSeek.Player
         {
             playerController = GetComponent<PlayerController>();
             characterMovement = GetComponent<CharacterMovement>();
-
-            if (playerController == null)
-            {
-                Debug.LogError("PlayerInputTraditional requires a PlayerController component!");
-            }
         }
 
         private void SetupInputKeys()
@@ -92,7 +87,6 @@ namespace HideAndSeek.Player
                     break;
 
                 default:
-                    Debug.LogWarning($"Unsupported player ID: {playerID}. Using P1 defaults.");
                     playerID = 1;
                     SetupInputKeys();
                     break;

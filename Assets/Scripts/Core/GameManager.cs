@@ -147,7 +147,6 @@ namespace HideAndSeek.Core
             AudioEffectManaager.Instance.PlayGameStartEffect();
 
             OnGameStart?.Invoke();
-            Debug.Log("Game Started!");
         }
 
         public void EndGame(PlayerRole winner)
@@ -168,8 +167,7 @@ namespace HideAndSeek.Core
             currentState = GameState.GameOver;
             OnGameEnd?.Invoke();
             OnGameWin?.Invoke(winner);
-            gameEndUI.Show(killCount, killScore, currentGameTime);            
-            Debug.Log($"Game Over! Winner: {winner}");
+            gameEndUI.Show(killCount, killScore, currentGameTime);
         }
 
         public void RestartGame()
