@@ -81,6 +81,14 @@ namespace HideAndSeek.Core
         private float comboTime;
         private Coroutine comboCoolDown;
 
+
+
+        [Header("DEBUG")]
+        [SerializeField] private KeyCode DebugKey = KeyCode.G;
+        [SerializeField] private int KillerChildNumber = 2;
+        [SerializeField] private int PoliceChildNumber = 3;
+        private bool debugMode = false;
+
         private void Awake()
         {
             // Ensure singleton pattern
@@ -114,6 +122,13 @@ namespace HideAndSeek.Core
             if (currentState == GameState.Playing)
             {
                 UpdateGameTime(currentGameTime + Time.deltaTime);
+
+                if(Input.GetKeyDown(DebugKey))
+                {
+                    debugMode = !debugMode;
+                    killerPlayer.transform.GetChild(KillerChildNumber).gameObject.SetActive(debugMode);
+                    killerPlayer.transform.GetChild(PoliceChildNumber).gameObject.SetActive(debugMode); 
+                }
             }
         }
 
