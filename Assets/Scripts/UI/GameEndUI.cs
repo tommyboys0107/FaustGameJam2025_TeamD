@@ -11,9 +11,7 @@ public class GameEndUI : MonoBehaviour
     {
         killCountText.text = $"Kill: {killCount}";
         scoreText.text = $"Score: {score}";
-        int minutes = (int)(time / 60);
-        int seconds = (int)(time % 60);
-        timeText.text = $"{minutes:D2}:{seconds:D2}";
+        timeText.ShowTime(time);
         gameObject.SetActive(true);
     }
 }

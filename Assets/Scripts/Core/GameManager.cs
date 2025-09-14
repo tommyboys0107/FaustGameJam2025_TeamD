@@ -121,9 +121,7 @@ namespace HideAndSeek.Core
         private void UpdateGameTime(float time)
         {
             currentGameTime += Time.deltaTime;
-            int minutes = (int)(time / 60);
-            int seconds = (int)(time % 60);
-            gameTimeText.text =$"{minutes:D2}:{seconds:D2}";
+            gameTimeText.ShowTime(time);;
         }
 
         private void updateKillScore(int core)
